@@ -7,7 +7,6 @@ import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/twitch_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/youtube_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/creator_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/jj_schedule_bloc.dart';
-import 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/news_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/poll_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/schedule_bloc.dart';
@@ -25,7 +24,6 @@ class YBlocMobile {
   ChangelogBloc changelogBloc;
   JJScheduleBloc jjScheduleBloc;
   ScheduleBloc scheduleBloc;
-  NotificationBloc notificationBloc;
   NewsBloc newsBloc;
   PodcastBloc podcastBloc;
   YogconBloc yogconBloc;
@@ -40,7 +38,6 @@ class YBlocMobile {
     pollBloc = PollBloc();
     changelogBloc = ChangelogBloc();
     scheduleBloc = ScheduleBloc();
-    notificationBloc = NotificationBloc();
     newsBloc = NewsBloc();
     podcastBloc = PodcastBloc();
     yogconBloc = YogconBloc();
@@ -129,8 +126,6 @@ class YBlocMobile {
       await Prefs.remove('notificationFilterTwitch');
       await Prefs.setBool('isFirstSettingsStart18', false);
     }
-
-    await notificationBloc.open();
   }
 
   Future<Null> clearDatabase() async {
@@ -183,6 +178,5 @@ class YBlocMobile {
     creatorBloc?.dispose();
     twitchBloc?.dispose();
     youtubeBloc?.dispose();
-    notificationBloc?.dispose();
   }
 }
