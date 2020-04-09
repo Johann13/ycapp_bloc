@@ -33,7 +33,8 @@ export 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/podcast_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/twitch_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/youtube_bloc.dart';
 
-export 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc.dart';
+export 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc.dart'
+    if (dart.library.io) 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart';
 
 export 'package:ycapp_bloc/bloc/data_blocs/changelog_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/creator_bloc.dart';

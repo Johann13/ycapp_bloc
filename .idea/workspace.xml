@@ -7,18 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/root/root.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/twitch_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/twitch_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/youtube_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/youtube_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/jj_schedule_bloc_2018.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/schedule.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/schedule_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_web.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pref/bool/boo_pref_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ycappbloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ycappbloc.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586358781201</updated>
-      <workItem from="1586466063685" duration="1460000" />
+      <workItem from="1586466063685" duration="1657000" />
     </task>
     <servers />
   </component>

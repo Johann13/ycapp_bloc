@@ -7,7 +7,7 @@ import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/twitch_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/youtube_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/creator_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/jj_schedule_bloc.dart';
-import 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc.dart';
+import 'package:ycapp_bloc/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/news_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/poll_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/schedule_bloc.dart';
