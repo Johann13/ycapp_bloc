@@ -6,13 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/ycappbloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ycappbloc.dart" afterDir="false" />
-    </list>
+    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +67,7 @@
       <option name="presentableId" value="Default" />
       <updated>1586358781201</updated>
       <workItem from="1586466063685" duration="2098000" />
-      <workItem from="1586468169869" duration="1794000" />
+      <workItem from="1586468169869" duration="1948000" />
     </task>
     <servers />
   </component>
