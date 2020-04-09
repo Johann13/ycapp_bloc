@@ -6,7 +6,29 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="" />
+    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pref/config/config_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pref/settings_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/pref/settings_provider.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/loader/creator_data_loader.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/loader/pref_data_loader.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/loader/twitch_data_loader.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/loader/youtube_data_loader.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/pref/settings_streams.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/ui/pref/settings_widgets.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/boo_pref_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/boo_pref_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/confic_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/config/confic_bloc_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/web/bool_pref_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/web/confic_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/config/confic_bloc_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pref/pref_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/pref_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/root/root_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/root/root_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/root/root_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/root/root_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +43,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1aGOQvMGx0NCxKIRttiD0kub4Xa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../yapp-mobile" />
@@ -29,16 +55,18 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\ycapp_bloc\lib\pref\config" />
+      <recent name="C:\Projects\ycapp_bloc\lib\pref\bool" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc" />
       <recent name="C:\Projects\ycapp_bloc\lib\misc" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\pref" />
-      <recent name="C:\Projects\ycapp_bloc\lib\bloc\data_blocs\mobile" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\ycapp_bloc\lib\ui" />
+      <recent name="C:\Projects\ycapp_bloc\lib\ui\loader" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\pref" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\data_blocs\web" />
-      <recent name="C:\Projects\ycapp_bloc\ycapp_bloc\lib" />
     </key>
   </component>
   <component name="RunDashboard">

@@ -5,7 +5,7 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
   flutter: ">=1.10.0"
 
 dependencies:
@@ -37,7 +37,7 @@ dev_dependencies:
   flutter_local_notifications: ^1.4.0
   device_info: ^0.4.2+1
   path_provider: ^1.6.5
-
+  auto_size_text: ^2.1.0
   intl: ^0.16.1
   timezone: ^0.5.6
   firebase: ^7.3.0

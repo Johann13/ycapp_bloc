@@ -4,6 +4,7 @@ import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_bloc/pref/settings_bloc_web.dart';
+import 'package:ycapp_bloc/pref/settings_provider.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_builder.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_future_widgets.dart';
 
@@ -21,7 +22,8 @@ class RootWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsProviderWeb(
+    return SettingsProvider(
+      bloc: SettingsBlocWeb(),
       child: RepoProvider(
         child: Builder(
           builder: (context) {
@@ -70,7 +72,7 @@ class RootWeb extends StatelessWidget {
       try {
         await Future.wait([
           //_initTimezone(),
-          SettingsProviderWeb.of(context).init(),
+          SettingsProvider.of(context).init(),
           RepoProvider.of(context).init(),
         ]);
       } catch (e) {

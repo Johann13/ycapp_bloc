@@ -5,6 +5,7 @@ import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_bloc/pref/settings_bloc_mobile.dart';
+import 'package:ycapp_bloc/pref/settings_provider.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_builder.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_future_widgets.dart';
 
@@ -22,7 +23,8 @@ class RootMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsProviderMobile(
+    return SettingsProvider(
+      bloc: SettingsBlocMobile(),
       child: RepoProvider(
         child: Builder(
           builder: (context) {
@@ -52,8 +54,7 @@ class RootMobile extends StatelessWidget {
     Duration duration = await time('init', () async {
       try {
         await Future.wait([
-          //_initTimezone(),
-          SettingsProviderMobile.of(context).init(),
+          SettingsProvider.of(context).init(),
           RepoProvider.of(context).init(),
         ]);
       } catch (e) {

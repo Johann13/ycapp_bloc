@@ -1,17 +1,13 @@
 import 'dart:async';
-import 'dart:core';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ycapp_bloc/pref/pref_repo.dart';
-import 'package:ycapp_connectivity/ycappconnectivity.dart';
 import 'package:ycapp_foundation/model/channel/image_quality.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
 import 'package:ycapp_foundation/ui/y_colors.dart';
 
-class BoolPrefWeb extends Pref<bool> {
-  YConnectivityResult _connected = YConnectivityResult.none;
-  bool _wifi;
+class BoolPref extends Pref<bool> {
+
   bool _saveData;
   bool _lowQualityImages;
   bool _loadImages;
@@ -36,7 +32,6 @@ class BoolPrefWeb extends Pref<bool> {
   bool _useCreatorTheme;
   bool _useCreatorThemeDark;
 
-  StreamSubscription<YConnectivityResult> _connectivitySub;
   StreamSubscription sub2;
   StreamSubscription sub3;
   StreamSubscription loadImagesSub;
@@ -51,7 +46,7 @@ class BoolPrefWeb extends Pref<bool> {
   StreamSubscription _scheduleArtSub;
   StreamSubscription _showScheduleAnimationSub;
   StreamSubscription _useMerchSubTitleSub;
-  StreamSubscription darkModeSub;
+  StreamSubscription _darkModeSub;
   StreamSubscription _vodIconsSub;
   StreamSubscription _useSideMenuDarkModeToggleSub;
   StreamSubscription _showYcCountdownSub;
@@ -61,15 +56,19 @@ class BoolPrefWeb extends Pref<bool> {
   StreamSubscription _useCreatorThemeSub;
   StreamSubscription _useCreatorThemeDarkSub;
 
-  Future<Null> init() async {
-    _connectivitySub =
-        YConnectivity().onConnectivityChanged.listen((result) async {
-      _wifi = (result == YConnectivityResult.wifiSlow) ||
-          (result == YConnectivityResult.wifiMedium) ||
-          (result == YConnectivityResult.wifiFast);
-      print('pref.$result');
-      _connected = result;
-    });
+
+  @override
+  Future<bool> _getPref(String prefName, bool defaultValue) {
+    return Prefs.getBool(prefName, defaultValue);
+  }
+
+  @override
+  Future<Null> _setPref(String prefName, bool value) async {
+    await Prefs.setBool(prefName, value);
+  }
+
+  @override
+  Future<Null> init() {
 
     sub2 = getPrefStream('saveData', true).listen((data) {
       _saveData = data;
@@ -88,34 +87,24 @@ class BoolPrefWeb extends Pref<bool> {
     });
     _loadTwitchThumbnailSub =
         getPrefStream('loadTwitchThumbnail', true).listen((data) {
-      _loadTwitchThumbnail = data;
-    });
+          _loadTwitchThumbnail = data;
+        });
     _loadYoutubeThumbnailSub =
         getPrefStream('loadYoutubeThumbnail', true).listen((data) {
-      _loadYoutubeThumbnail = data;
-    });
+          _loadYoutubeThumbnail = data;
+        });
 
     _youtubeSmallThumbSub =
         getPrefStream('youtubeSmallThumb', true).listen((data) {
-      _youtubeSmallThumb = data;
-    });
+          _youtubeSmallThumb = data;
+        });
     _twitchSmallThumbSub =
         getPrefStream('twitchSmallThumb', false).listen((data) {
-      _twitchSmallThumb = data;
-    });
+          _twitchSmallThumb = data;
+        });
 
-    darkModeSub = getPrefStream('darkMode', false).listen((data) {
-      _darkMode = data;
-      /*
-      FlutterStatusbarManager.setColor(
-          _darkMode ? Colors.black : YColors.primaryColorPallet[700],
-          animated: true);
-
-      FlutterStatusbarManager.setNavigationBarColor(
-          _darkMode ? Colors.black : YColors.primaryColor,
-          animated: true);
-      FlutterStatusbarManager.setNavigationBarStyle(NavigationBarStyle.LIGHT);*/
-    });
+    _darkModeSub = getPrefStream('darkMode', false).listen((data) {
+      _darkMode = data; });
 
     _vodIconsSub = getPrefStream('vodIcons', true).listen((data) {
       _vodIcons = data;
@@ -127,8 +116,8 @@ class BoolPrefWeb extends Pref<bool> {
 
     _showNotificationIconSub =
         getPrefStream('showNotificationIcon', true).listen((data) {
-      _showNotificationIcon = data;
-    });
+          _showNotificationIcon = data;
+        });
 
     _scheduleArtSub = getPrefStream('scheduleArt', true).listen((value) {
       _scheduleArt = value;
@@ -136,25 +125,25 @@ class BoolPrefWeb extends Pref<bool> {
 
     _showScheduleAnimationSub =
         getPrefStream('showScheduleAnimation', true).listen((value) {
-      _showScheduleAnimation = value;
-    });
+          _showScheduleAnimation = value;
+        });
     _useMerchSubTitleSub =
         getPrefStream('useMerchSubTitle', true).listen((value) {
-      _useMerchSubTitle = value;
-    });
+          _useMerchSubTitle = value;
+        });
 
     _useSideMenuDarkModeToggleSub =
         getPrefStream('useSideMenuDarkModeToggle', true).listen((value) {
-      _useSideMenuDarkModeToggle = value;
-    });
+          _useSideMenuDarkModeToggle = value;
+        });
     _showYcCountdownSub =
         getPrefStream('showYcCountdown', true).listen((value) {
-      _showYcCountdown = value;
-    });
+          _showYcCountdown = value;
+        });
     _useNotificationSystemV2Sub =
         getPrefStream('useNotificationSystemV2', false).listen((value) {
-      _useNotificationSystemV2 = value;
-    });
+          _useNotificationSystemV2 = value;
+        });
 
     _amoledModeSub = getPrefStream("amoledMode", false).listen((value) {
       _amoledMode = value;
@@ -162,24 +151,27 @@ class BoolPrefWeb extends Pref<bool> {
 
     _useCreatorThemeOnMainPageSub =
         getPrefStream('useCreatorThemeOnMainPage', false).listen((value) {
-      _useCreatorThemeOnMainPage = value;
-    });
+          _useCreatorThemeOnMainPage = value;
+        });
     _useCreatorThemeSub =
         getPrefStream('useCreatorTheme', true).listen((value) {
-      _useCreatorTheme = value;
-    });
+          _useCreatorTheme = value;
+        });
 
     _useCreatorThemeDarkSub =
         getPrefStream('useCreatorThemeDark', true).listen((value) {
-      _useCreatorThemeDark = value;
-    });
-
-    return null;
+          _useCreatorThemeDark = value;
+        });
   }
 
-  bool get connected {
-    return _connected != YConnectivityResult.none;
-  }
+  get saveData => _saveData;
+
+  get lowQualityImages => _lowQualityImages;
+
+  get twitchSmallThumb => _twitchSmallThumb;
+
+  get youtubeSmallThumb => _youtubeSmallThumb;
+
 
   get loadImages {
     return _loadImages;
@@ -199,14 +191,6 @@ class BoolPrefWeb extends Pref<bool> {
 
   get loadYoutubeThumbnail {
     return _loadYoutubeThumbnail || _loadImages;
-  }
-
-  get youtubeSmallThumb {
-    return _youtubeSmallThumb;
-  }
-
-  get twitchSmallThumb {
-    return _twitchSmallThumb;
   }
 
   bool get darkMode {
@@ -238,7 +222,7 @@ class BoolPrefWeb extends Pref<bool> {
   }
 
   Quality get quality {
-    if (_lowQualityImages || (!_wifi && _saveData)) {
+    if (_lowQualityImages || (_saveData)) {
       return Quality.low;
     } else {
       return Quality.high;
@@ -246,39 +230,12 @@ class BoolPrefWeb extends Pref<bool> {
   }
 
   TwitchQuality get twitchQuality {
-    switch (_connected) {
-      case YConnectivityResult.wifiFast:
-        return TwitchQuality.high;
-        break;
-      case YConnectivityResult.wifiMedium:
-        return TwitchQuality.medium;
-        break;
-      case YConnectivityResult.wifiSlow:
-        return TwitchQuality.low;
-        break;
-      case YConnectivityResult.mobileFast:
-        if (_lowQualityImages || _saveData || _twitchSmallThumb) {
-          return TwitchQuality.medium;
-        } else {
-          return TwitchQuality.high;
-        }
-        break;
-      case YConnectivityResult.mobileMedium:
-        if (_lowQualityImages || _saveData || _youtubeSmallThumb) {
-          return TwitchQuality.low;
-        } else {
-          return TwitchQuality.medium;
-        }
-        break;
-      case YConnectivityResult.mobileSlow:
-      case YConnectivityResult.none:
-      default:
-        return TwitchQuality.low;
-        break;
-    }
+    return TwitchQuality.medium;
   }
 
   YoutubeQuality get youtubeQuality {
+    return YoutubeQuality.medium;
+    /*
     switch (_connected) {
       case YConnectivityResult.wifiFast:
         return YoutubeQuality.high;
@@ -308,7 +265,7 @@ class BoolPrefWeb extends Pref<bool> {
       default:
         return YoutubeQuality.low;
         break;
-    }
+    }*/
   }
 
   Color get buttonColor {
@@ -344,19 +301,8 @@ class BoolPrefWeb extends Pref<bool> {
   get useNotificationSystemV2 => _useNotificationSystemV2;
 
   @override
-  Future<bool> _getPref(String prefName, bool defaultValue) {
-    return Prefs.getBool(prefName, defaultValue);
-  }
-
-  @override
-  Future<Null> _setPref(String prefName, bool value) async {
-    await Prefs.setBool(prefName, value);
-  }
-
-  @override
   void dispose() {
     super.dispose();
-    _connectivitySub?.cancel();
     sub2?.cancel();
     sub3?.cancel();
     loadImagesSub?.cancel();
@@ -364,7 +310,7 @@ class BoolPrefWeb extends Pref<bool> {
     _loadProfileSub?.cancel();
     _loadTwitchThumbnailSub?.cancel();
     _loadYoutubeThumbnailSub?.cancel();
-    darkModeSub?.cancel();
+    _darkModeSub?.cancel();
     _vodIconsSub?.cancel();
     _youtubeSmallThumbSub?.cancel();
     _twitchSmallThumbSub?.cancel();
