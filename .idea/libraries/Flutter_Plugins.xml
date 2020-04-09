@@ -1,0 +1,29 @@
+<component name="libraryTable">
+  <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
+    <CLASSES>
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_remote_config-0.3.0+3" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_functions_web-1.0.3" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences_web-0.1.2+4" />
+      <root url="file://C:/flutter/.pub-cache/git/ycapp_messaging-53e4b59b60ad523a10c8d683a3228c18ee835694" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.4.4+3" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.13.4+2" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-1.4.0" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+1" />
+      <root url="file://C:/flutter/.pub-cache/git/ycapp_analytics-9c7f445faf20407c40b2cc165de3b54601a4a0bb" />
+      <root url="file://C:/flutter/.pub-cache/git/ycapp_connectivity-c034840d9c8d25599ffe10def8ddae0edd25a952" />
+      <root url="file://$PROJECT_DIR$" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-6.0.13" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-1.3.0" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_analytics-5.0.11" />
+      <root url="file://C:/flutter/.pub-cache/git/ycapp_foundation-06dc7b8bcbb3212cef8f22c9fe999f61f3fc9fda" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_functions-0.4.2+3" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.6+3" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.1.1+2" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.5" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-0.1.1+2" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
