@@ -3,15 +3,11 @@ import 'dart:convert';
 
 import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
-import 'package:ycapp_foundation/sort/sort.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/channel_bloc.dart';
 import 'package:ycapp_foundation/model/channel/twitch_channel.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
-
-typedef void AddListener(String id);
-typedef void RemoveListener(String id);
+import 'package:ycapp_foundation/sort/sort.dart';
 
 class TwitchBloc extends ChannelBloc<TwitchChannel> {
   bool isSubscribedToAnyTwitchChannelOfCreator(Creator creator) =>
@@ -127,7 +123,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
             .toList());
   }
 
-  Future<Response> getTwitchFollows(String name) async {
+  Future<http.Response> getTwitchFollows(String name) async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/twitch/$name');
     return resp;

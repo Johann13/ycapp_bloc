@@ -3,15 +3,11 @@ import 'dart:convert';
 
 import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/channel_bloc.dart';
 import 'package:ycapp_foundation/model/channel/youtube_channel.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
 import 'package:ycapp_foundation/sort/sort.dart';
-
-typedef void AddListener(String id);
-typedef void RemoveListener(String id);
 
 class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
   bool isSubscribedToAnyYoutubeChannelOfCreator(Creator creator) =>
@@ -98,7 +94,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
 
   //endregion
 
-  Future<Response> getYoutubeSubs(String auth) async {
+  Future<http.Response> getYoutubeSubs(String auth) async {
     var resp = await http
         .get('https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/'
             'userAccessData/youtube/auth/$auth');

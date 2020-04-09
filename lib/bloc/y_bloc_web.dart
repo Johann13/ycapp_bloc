@@ -10,12 +10,12 @@ import 'package:ycapp_bloc/bloc/data_blocs/creator_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/jj_schedule_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/news_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/poll_bloc.dart';
-import 'package:ycapp_bloc/bloc/data_blocs/schedule.dart';
+import 'package:ycapp_bloc/bloc/data_blocs/schedule_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/yogcon_bloc.dart';
+import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
 import 'package:ycapp_messaging/ycapp_messaging.dart';
 
-import 'file:///C:/Projects/ycapp_bloc/lib/misc/function_timer.dart';
 
 class YBlocMobile {
   CreatorBloc creatorBloc;

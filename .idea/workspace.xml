@@ -7,29 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pref/config/config_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pref/settings_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/pref/settings_provider.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/loader/creator_data_loader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/loader/pref_data_loader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/loader/twitch_data_loader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/loader/youtube_data_loader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/pref/settings_streams.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/ui/pref/settings_widgets.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/root/root.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/boo_pref_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/boo_pref_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/confic_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/config/confic_bloc_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/web/bool_pref_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref_web.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/web/confic_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/config/confic_bloc_web.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/pref/pref_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/pref_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/twitch_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/twitch_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/youtube_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/channel_blocs/youtube_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/jj_schedule_bloc_2018.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/schedule.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/schedule_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pref/bool/boo_pref_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/bool/bool_pref_mobile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_mobile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/settings_bloc_web.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/root/root_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/root/root_mobile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/root/root_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/root/root_web.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/ycappbloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ycappbloc.dart" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,9 +39,19 @@
   </component>
   <component name="ProjectId" id="1aGOQvMGx0NCxKIRttiD0kub4Xa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../yapp-mobile" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -69,18 +70,6 @@
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\data_blocs\web" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -91,7 +80,21 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586358781201</updated>
+      <workItem from="1586466063685" duration="1460000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="371" y="107" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586467429439">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="371" y="107" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.720@0.0.1280.720" timestamp="1586467429439" />
+    <state x="350" y="94" width="579" height="530" key="find.popup" timestamp="1586466355938">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="350" y="94" width="579" height="530" key="find.popup/0.0.1280.720@0.0.1280.720" timestamp="1586466355938" />
   </component>
 </project>
