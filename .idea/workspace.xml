@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc_mobile.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/bloc/y_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/mobile/custom_notification_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/y_bloc_mobile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/ycappbloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/ycappbloc.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,19 +45,19 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Projects\ycapp_bloc\lib\pref\config" />
-      <recent name="C:\Projects\ycapp_bloc\lib\pref\bool" />
-      <recent name="C:\Projects\ycapp_bloc\lib\bloc" />
-      <recent name="C:\Projects\ycapp_bloc\lib\misc" />
-      <recent name="C:\Projects\ycapp_bloc\lib\bloc\pref" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Projects\ycapp_bloc\lib\ui" />
       <recent name="C:\Projects\ycapp_bloc\lib\ui\loader" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\pref" />
       <recent name="C:\Projects\ycapp_bloc\lib\bloc\data_blocs\web" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Projects\ycapp_bloc\lib\bloc" />
+      <recent name="C:\Projects\ycapp_bloc\lib\pref\config" />
+      <recent name="C:\Projects\ycapp_bloc\lib\pref\bool" />
+      <recent name="C:\Projects\ycapp_bloc\lib\misc" />
+      <recent name="C:\Projects\ycapp_bloc\lib\bloc\pref" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -72,7 +70,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1586358781201</updated>
-      <workItem from="1586466063685" duration="1657000" />
+      <workItem from="1586466063685" duration="1893000" />
     </task>
     <servers />
   </component>

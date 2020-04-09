@@ -44,3 +44,7 @@ export 'package:ycapp_bloc/bloc/data_blocs/news_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/poll_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/schedule_bloc.dart';
 export 'package:ycapp_bloc/bloc/data_blocs/yogcon_bloc.dart';
+
+export 'package:ycapp_bloc/bloc/y_bloc.dart'
+    if (dart.library.io) 'package:ycapp_bloc/bloc/y_bloc_mobile.dart'
+    if (dart.library.html) 'package:ycapp_bloc/bloc/y_bloc_web.dart';
