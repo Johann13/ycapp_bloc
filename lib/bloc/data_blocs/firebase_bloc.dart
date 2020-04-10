@@ -77,6 +77,6 @@ abstract class FirestoreBloc<T> {
   }
 
   Stream<List<T>> _combine(int i, List<Stream<T>> list) {
-    return ZipStream(list, (v) => v.toList());
+    return CombineLatestStream.list(list);
   }
 }
