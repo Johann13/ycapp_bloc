@@ -6,7 +6,10 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="" />
+    <list default="true" id="7282a55b-319a-4c56-9632-512dfe61e57d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/lib/bloc/data_blocs/firebase_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/bloc/data_blocs/firebase_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pref/pref_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pref/pref_repo.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,6 +71,7 @@
       <updated>1586358781201</updated>
       <workItem from="1586466063685" duration="2098000" />
       <workItem from="1586468169869" duration="1948000" />
+      <workItem from="1586478907359" duration="57000" />
     </task>
     <servers />
   </component>
@@ -79,9 +83,9 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="371" y="107" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.720@0.0.1280.720" timestamp="1586467429439" />
-    <state x="350" y="94" width="579" height="530" key="find.popup" timestamp="1586466355938">
+    <state x="350" y="94" width="579" height="530" key="find.popup" timestamp="1586478952872">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="350" y="94" width="579" height="530" key="find.popup/0.0.1280.720@0.0.1280.720" timestamp="1586466355938" />
+    <state x="350" y="94" width="579" height="530" key="find.popup/0.0.1280.720@0.0.1280.720" timestamp="1586478952872" />
   </component>
 </project>
