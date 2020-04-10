@@ -50,7 +50,7 @@ abstract class Pref<T> {
   }
 
   Stream<List<T>> _combine(int i, List<Stream<T>> list) {
-    return ZipStream(list, (v) => v.toList());
+    return CombineLatestStream.list(list);
   }
 
   Future<Null> setMultiplePrefs(List<String> prefNames, List<T> values) async {
