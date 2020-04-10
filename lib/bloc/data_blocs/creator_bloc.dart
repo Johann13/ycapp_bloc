@@ -25,9 +25,12 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   final _collaborationSubject = BehaviorSubject<List<String>>();
   List<String> _collaborationList = [];
 
-  Stream<List<String>> get collaboration => _collaborationSubject;
+  Stream<List<String>> get collaboration => _collaborationSubject.asBroadcastStream();
   final _collaborationInboxSubject = BehaviorSubject<List<String>>();
   List<String> _collaborationInboxList = [];
+  Stream<List<String>> get creatorIdsStream => _creatorIdsSubject.asBroadcastStream();
+
+  List<String> get creatorIdList => _creatorIdList;
 
   CreatorBloc();
 
@@ -44,9 +47,6 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     print('creator initList done ${DateTime.now().difference(now)}');
   }
 
-  Stream<List<String>> get creatorIdsStream => _creatorIdsSubject;
-
-  List<String> get creatorIdList => _creatorIdList;
 
   Stream<List<Creator>> getAllCreator() {
     return Firestore.instance
