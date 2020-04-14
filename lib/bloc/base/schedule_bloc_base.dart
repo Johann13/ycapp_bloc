@@ -1,6 +1,6 @@
-import 'package:ycapp_foundation/model/schedule/schedule.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_foundation/model/schedule/combined_schedule.dart';
+import 'package:ycapp_foundation/model/schedule/schedule.dart';
 
 abstract class ScheduleBlocBase {
   Stream<List<ScheduleSlot>> getSlots(String twitchId);
@@ -50,9 +50,7 @@ abstract class ScheduleBlocBase {
         .map((list) => CombinedSchedule.withList(list));
   }
 
-
   ScheduleSlot toSlot(String twitchId, Map map) {
     return ScheduleSlot.fromMap(twitchId, map);
   }
-
 }

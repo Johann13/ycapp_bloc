@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
 abstract class DataBloc<T> {
-  String collectionPath();
 
-  T fromMap(Map map);
+  String collectionPath();
 
   Stream<T> getById(String docId);
 
   Stream<List<T>> getAll();
 
   Future<T> getOnceById(String docId);
+
+  T fromMap(Map map);
 
   Stream<List<T>> getByIds(List<String> docIds) {
     if (docIds.isEmpty) {

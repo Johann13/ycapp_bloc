@@ -4,14 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ycapp_bloc/bloc/firebase/data_bloc_base.dart';
 
 abstract class FirestoreBloc<T> extends DataBloc<T> {
-
   @override
   Stream<T> getById(String docId) {
     return Firestore.instance
         .collection(collectionPath())
         .document(docId)
         .snapshots()
-        .map((snap) {
+          .map((snap) {
       if (snap == null) {
         return null;
       }
