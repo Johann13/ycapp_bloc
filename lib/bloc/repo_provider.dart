@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:ycapp_bloc/bloc/y_bloc_mobile.dart';
+import 'package:ycapp_bloc/bloc/base_y_bloc.dart';
 
 class RepoProvider extends StatefulWidget {
   final Widget child;
+  final BaseYBloc yBloc;
 
-  RepoProvider({Key key, @required this.child}) : super(key: key);
+  RepoProvider({
+    Key key,
+    @required this.child,
+    @required this.yBloc,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _RepoProviderState();
 
-  static YBlocMobile of(BuildContext context) =>
+  static BaseYBloc of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<_RepoProvider>().bloc;
 }
 
 class _RepoProviderState extends State<RepoProvider> {
-  YBlocMobile _yBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _yBloc = new YBlocMobile();
-  }
+  BaseYBloc get _yBloc => widget.yBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +37,9 @@ class _RepoProviderState extends State<RepoProvider> {
 }
 
 class _RepoProvider extends InheritedWidget {
-  final YBlocMobile bloc;
+  final BaseYBloc bloc;
 
-  _RepoProvider({Key key, @required Widget child, @required YBlocMobile bloc})
+  _RepoProvider({Key key, @required Widget child, @required BaseYBloc bloc})
       : bloc = bloc,
         super(key: key, child: child);
 

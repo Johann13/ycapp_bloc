@@ -24,6 +24,10 @@ class ScheduleBloc {
     return getSlots(twitchId).map((list) => Schedule(twitchId, list));
   }
 
+  Future<Schedule> getScheduleOnce(String twitchId) {
+    return getSlotsOnce(twitchId).then((value) => Schedule(twitchId, value));
+  }
+
   Future<List<ScheduleSlot>> getSlotsOnce(String twitchId) async {
     QuerySnapshot snapshot = await Firestore.instance
         .collection('TwitchChannel')

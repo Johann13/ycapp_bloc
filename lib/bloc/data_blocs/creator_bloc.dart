@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
-import 'package:ycapp_bloc/bloc/data_blocs/firebase_bloc.dart';
+import 'package:ycapp_bloc/bloc/firebase/firestore_bloc.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
 import 'package:ycapp_messaging/ycapp_messaging.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';

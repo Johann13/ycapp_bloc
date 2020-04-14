@@ -1,7 +1,7 @@
 import 'package:webfeed/domain/rss_feed.dart';
+import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/channel_bloc.dart';
 import 'package:ycapp_foundation/model/channel/podcast.dart';
 
-import 'channel_bloc.dart';
 
 class PodcastBloc extends ChannelBloc<Podcast> {
   Map<String, RssFeed> cache = {};

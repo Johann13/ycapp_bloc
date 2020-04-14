@@ -3,9 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:timezone/timezone.dart';
 import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
+import 'package:ycapp_bloc/bloc/y_bloc_mobile.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
+import 'package:ycapp_bloc/misc/post_init.dart';
 import 'package:ycapp_bloc/pref/settings_bloc_mobile.dart';
 import 'package:ycapp_bloc/pref/settings_provider.dart';
+import 'package:ycapp_bloc/root/base_root.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_builder.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_future_widgets.dart';
 
@@ -13,16 +16,31 @@ class RootMobile extends StatelessWidget {
   final WidgetBuilder builder;
   final WidgetBuilder loading;
   final ErrorBuilder error;
+  final PostInit postInit;
 
   const RootMobile({
     Key key,
     @required this.builder,
     @required this.loading,
     @required this.error,
+    this.postInit,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return BaseRoot(
+      yBloc: YBlocMobile(),
+      settingsBloc: SettingsBlocMobile(),
+      initTimeDB: (context) async {
+        var byteData = await rootBundle.load('assets/2019c.tzf');
+        initializeDatabase(byteData.buffer.asUint8List());
+      },
+      loading: loading,
+      error: error,
+      builder: builder,
+      postInit: postInit,
+    );
+    /*
     return SettingsProvider(
       bloc: SettingsBlocMobile(),
       child: RepoProvider(
@@ -43,7 +61,7 @@ class RootMobile extends StatelessWidget {
           },
         ),
       ),
-    );
+    );*/
   }
 
   Future<List<bool>> _init(BuildContext context) async {
@@ -65,6 +83,9 @@ class RootMobile extends StatelessWidget {
     await YAnalytics.log('init', parameters: {
       'duration': duration.inMilliseconds,
     });
+    if (postInit != null) {
+      await postInit();
+    }
     return [true, true];
   }
 }

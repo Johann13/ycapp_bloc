@@ -6,11 +6,12 @@ import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_bloc/misc/post_init.dart';
 import 'package:ycapp_bloc/pref/settings_bloc.dart';
 import 'package:ycapp_bloc/pref/settings_provider.dart';
-import 'package:ycapp_bloc/root/base_root.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_builder.dart';
 import 'package:ycapp_foundation/ui/loader/base/y_future_widgets.dart';
 
-class Root extends StatelessWidget {
+typedef Future<void> InitTimeDB(BuildContext context);
+
+class BaseRoot extends StatelessWidget {
   final WidgetBuilder builder;
   final WidgetBuilder loading;
   final ErrorBuilder error;
@@ -19,7 +20,7 @@ class Root extends StatelessWidget {
   final SettingsBloc settingsBloc;
   final PostInit postInit;
 
-  const Root({
+  const BaseRoot({
     Key key,
     @required this.yBloc,
     @required this.settingsBloc,

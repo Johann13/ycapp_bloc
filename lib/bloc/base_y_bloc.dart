@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ycapp_analytics/ycapp_analytics.dart';
-import 'package:ycapp_bloc/bloc/base_y_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/changelog_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/podcast_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/twitch_bloc.dart';
@@ -15,11 +13,10 @@ import 'package:ycapp_bloc/bloc/data_blocs/schedule_bloc.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/yogcon_bloc.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
+import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_messaging/ycapp_messaging.dart';
 
-
-class YBlocMobile extends BaseYBloc{
-  /*
+class BaseYBloc {
   CreatorBloc creatorBloc;
   TwitchBloc twitchBloc;
   YoutubeBloc youtubeBloc;
@@ -30,9 +27,10 @@ class YBlocMobile extends BaseYBloc{
   NewsBloc newsBloc;
   PodcastBloc podcastBloc;
   YogconBloc yogconBloc;
+
   Firestore firestore;
 
-  YBlocMobile() {
+  BaseYBloc() {
     print('YBloc');
     creatorBloc = CreatorBloc();
     twitchBloc = TwitchBloc();
@@ -180,5 +178,5 @@ class YBlocMobile extends BaseYBloc{
     creatorBloc?.dispose();
     twitchBloc?.dispose();
     youtubeBloc?.dispose();
-  }*/
+  }
 }

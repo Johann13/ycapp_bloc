@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:ycapp_bloc/bloc/data_blocs/firebase_bloc.dart';
+import 'package:ycapp_analytics/ycapp_analytics.dart';
+import 'package:ycapp_bloc/bloc/firebase/firestore_bloc.dart';
 import 'package:ycapp_foundation/model/channel/channel.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
 import 'package:ycapp_messaging/ycapp_messaging.dart';
-import 'package:ycapp_analytics/ycapp_analytics.dart';
 
 // Subscribe to Channel
 // => Subscribe Channel, Notification, Inbox

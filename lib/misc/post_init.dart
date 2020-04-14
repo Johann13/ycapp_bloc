@@ -1,0 +1,2 @@
+
+typedef Future<void> PostInit();
