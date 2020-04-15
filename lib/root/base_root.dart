@@ -19,6 +19,8 @@ class BaseRoot extends StatelessWidget {
   final BaseYBloc yBloc;
   final SettingsBloc settingsBloc;
   final PostInit postInit;
+  final bool analytics;
+  final bool logTime;
 
   const BaseRoot({
     Key key,
@@ -28,6 +30,8 @@ class BaseRoot extends StatelessWidget {
     @required this.loading,
     @required this.error,
     @required this.initTimeDB,
+    this.analytics = true,
+    this.logTime = false,
     this.postInit,
   }) : super(key: key);
 
@@ -58,9 +62,9 @@ class BaseRoot extends StatelessWidget {
   }
 
   Future<List<bool>> _init(BuildContext context) async {
-    await RepoProvider.of(context).initAnalytics();
+    await RepoProvider.of(context).initAnalytics(analytics);
     await initTimeDB(context);
-    Duration duration = await time('init', () async {
+    Duration duration = await time('init', logTime, () async {
       try {
         await Future.wait([
           SettingsProvider.of(context).init(),
@@ -70,7 +74,9 @@ class BaseRoot extends StatelessWidget {
         print(e);
       }
     });
-    print('init duration $duration');
+    if (duration != null) {
+      print('init duration $duration');
+    }
     await YAnalytics.log('init', parameters: {
       'duration': duration.inMilliseconds,
     });

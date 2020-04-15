@@ -29,8 +29,11 @@ class BaseYBloc {
   YogconBloc yogconBloc;
 
   Firestore firestore;
+  final bool logTime;
 
-  BaseYBloc() {
+  BaseYBloc({
+    this.logTime = false,
+  }) {
     print('YBloc');
     creatorBloc = CreatorBloc();
     twitchBloc = TwitchBloc();
@@ -45,32 +48,31 @@ class BaseYBloc {
   }
 
   Future<bool> init() async {
-    await time('init()', () async {
+    await time('init()', logTime, () async {
       await Future.wait([
-        time('main', () async {
-          await time('Firestore.instance.settings', () async {
+        time('main', logTime, () async {
+          await time('Firestore.instance.settings', logTime, () async {
             await Firestore.instance.settings(
               persistenceEnabled: true,
               cacheSizeBytes: 5 * 1000 * 1000,
             );
           });
-          await time('_init()', () async {
+          await time('_init()', logTime, () async {
             await _init();
           });
-          await time('_sub()', () async {
+          await time('_sub()', logTime, () async {
             await _sub();
           });
         }),
       ]);
     });
-
     return true;
   }
 
-  Future<Null> initAnalytics() async {
-    await time('analytics', () async {
+  Future<Null> initAnalytics(bool enable) async {
+    await time('analytics', logTime, () async {
       bool analytics = await Prefs.getBool('analyticsPermission', false);
-      await YAnalytics.enable(analytics);
+      await YAnalytics.enable(analytics && enable);
     });
   }
 
@@ -94,7 +96,7 @@ class BaseYBloc {
     if (duration.inHours >= 48) {
       print('resub topics');
       await Prefs.setInt('lastSub', now.millisecondsSinceEpoch);
-      await time('forceSub()', () async {
+      await time('forceSub()', logTime, () async {
         await forceSub();
       });
     } else {
@@ -105,13 +107,13 @@ class BaseYBloc {
 
   Future<Null> _init() async {
     await Future.wait([
-      time('creatorBloc.initList', () async {
+      time('creatorBloc.initList', logTime, () async {
         await creatorBloc.initList();
       }),
-      time('twitchBloc.initList', () async {
+      time('twitchBloc.initList', logTime, () async {
         await twitchBloc.initList();
       }),
-      time('youtubeBloc.initList', () async {
+      time('youtubeBloc.initList', logTime, () async {
         await youtubeBloc.initList();
       }),
       //notificationBloc.init(),
@@ -142,13 +144,13 @@ class BaseYBloc {
     await YMessaging.subscribeToTopic('all');
     print('FirebaseChannel.subscribeToTopic');
     await Future.wait([
-      time('creatorBloc.subscribeAll', () async {
+      time('creatorBloc.subscribeAll', logTime, () async {
         await creatorBloc.subscribeAll();
       }),
-      time('twitchBloc.subscribeAll', () async {
+      time('twitchBloc.subscribeAll', logTime, () async {
         await twitchBloc.subscribeAll();
       }),
-      time('youtubeBloc.subscribeAll', () async {
+      time('youtubeBloc.subscribeAll', logTime, () async {
         await youtubeBloc.subscribeAll();
       }),
     ]);

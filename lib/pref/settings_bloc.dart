@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_bloc/pref/bool/bool_pref.dart';
 import 'package:ycapp_bloc/pref/config/config_bloc.dart';
 import 'package:ycapp_bloc/pref/pref_repo.dart';
-import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_foundation/ui/y_colors.dart';
+
 abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
   IntPref intPref;
   DoublePref doublePref;
@@ -14,20 +15,22 @@ abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
   StringListPref stringListPref;
   B boolPref;
   C remoteConfig;
+  final bool logTime;
 
   List<String> _merchSubTitles = [];
 
-  SettingsBloc() {
+  SettingsBloc({
+    this.logTime = false,
+  }) {
     intPref = IntPref();
     doublePref = DoublePref();
     stringPref = StringPref();
     stringListPref = StringListPref();
   }
 
-
   Future<bool> init() async {
-    await time('init()', () async {
-      await time('pref init', () async {
+    await time('init()', logTime, () async {
+      await time('pref init', logTime, () async {
         await Future.wait([
           boolPref.init(),
           stringPref.init(),
@@ -38,7 +41,7 @@ abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
         return null;
       });
       await Future.wait([
-        time('_init()', () async {
+        time('_init()', logTime, () async {
           await _init();
           return null;
         }),
@@ -49,18 +52,20 @@ abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
   }
 
   Future<void> logUser();
+
   Future<Null> _initRemoteConfig() async {
-    await time('remoteConfig.init()', () async {
+    await time('remoteConfig.init()', logTime, () async {
       await remoteConfig.init();
     });
-    await time('initMerchSubTitles()', () async {
+    await time('initMerchSubTitles()', logTime, () async {
       _initMerchSubTitles();
     });
   }
+
   Future<bool> _init() async {
     await _logUserProperties();
     bool isFirstStart1042 =
-    await boolPref.getPref('isFirstSettingsStart1042', true);
+        await boolPref.getPref('isFirstSettingsStart1042', true);
     if (isFirstStart1042) {
       List<String> list = await stringListPref.getPref(
         'homePagePagePosition',
@@ -99,7 +104,7 @@ abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
   Future<void> _logUserProperties() async {
     print('_logUserProperties');
     bool analyticsPermission =
-    await boolPref.getPref('analyticsPermission', false);
+        await boolPref.getPref('analyticsPermission', false);
 
     if (!analyticsPermission) {
       return;
