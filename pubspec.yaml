@@ -31,7 +31,6 @@ dev_dependencies:
   ycapp_foundation:
     git:
       url: git://github.com/Johann13/ycapp_foundation.git
-      ref: package_to_plugin
 
   sqflite: ^1.3.0
   flutter_local_notifications: ^1.4.0
