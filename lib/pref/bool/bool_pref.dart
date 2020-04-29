@@ -7,7 +7,6 @@ import 'package:ycapp_foundation/prefs/prefs.dart';
 import 'package:ycapp_foundation/ui/y_colors.dart';
 
 class BoolPref extends Pref<bool> {
-
   bool _saveData;
   bool _lowQualityImages;
   bool _loadImages;
@@ -56,20 +55,18 @@ class BoolPref extends Pref<bool> {
   StreamSubscription _useCreatorThemeSub;
   StreamSubscription _useCreatorThemeDarkSub;
 
-
   @override
-  Future<bool> _getPref(String prefName, bool defaultValue) {
+  Future<bool> getPrefDirect(String prefName, bool defaultValue) {
     return Prefs.getBool(prefName, defaultValue);
   }
 
   @override
-  Future<Null> _setPref(String prefName, bool value) async {
+  Future<void> setPrefDirect(String prefName, bool value) async {
     await Prefs.setBool(prefName, value);
   }
 
   @override
-  Future<Null> init() {
-
+  Future<void> init() async {
     sub2 = getPrefStream('saveData', true).listen((data) {
       _saveData = data;
     });
@@ -87,24 +84,25 @@ class BoolPref extends Pref<bool> {
     });
     _loadTwitchThumbnailSub =
         getPrefStream('loadTwitchThumbnail', true).listen((data) {
-          _loadTwitchThumbnail = data;
-        });
+      _loadTwitchThumbnail = data;
+    });
     _loadYoutubeThumbnailSub =
         getPrefStream('loadYoutubeThumbnail', true).listen((data) {
-          _loadYoutubeThumbnail = data;
-        });
+      _loadYoutubeThumbnail = data;
+    });
 
     _youtubeSmallThumbSub =
         getPrefStream('youtubeSmallThumb', true).listen((data) {
-          _youtubeSmallThumb = data;
-        });
+      _youtubeSmallThumb = data;
+    });
     _twitchSmallThumbSub =
         getPrefStream('twitchSmallThumb', false).listen((data) {
-          _twitchSmallThumb = data;
-        });
+      _twitchSmallThumb = data;
+    });
 
     _darkModeSub = getPrefStream('darkMode', false).listen((data) {
-      _darkMode = data; });
+      _darkMode = data;
+    });
 
     _vodIconsSub = getPrefStream('vodIcons', true).listen((data) {
       _vodIcons = data;
@@ -116,8 +114,8 @@ class BoolPref extends Pref<bool> {
 
     _showNotificationIconSub =
         getPrefStream('showNotificationIcon', true).listen((data) {
-          _showNotificationIcon = data;
-        });
+      _showNotificationIcon = data;
+    });
 
     _scheduleArtSub = getPrefStream('scheduleArt', true).listen((value) {
       _scheduleArt = value;
@@ -125,25 +123,25 @@ class BoolPref extends Pref<bool> {
 
     _showScheduleAnimationSub =
         getPrefStream('showScheduleAnimation', true).listen((value) {
-          _showScheduleAnimation = value;
-        });
+      _showScheduleAnimation = value;
+    });
     _useMerchSubTitleSub =
         getPrefStream('useMerchSubTitle', true).listen((value) {
-          _useMerchSubTitle = value;
-        });
+      _useMerchSubTitle = value;
+    });
 
     _useSideMenuDarkModeToggleSub =
         getPrefStream('useSideMenuDarkModeToggle', true).listen((value) {
-          _useSideMenuDarkModeToggle = value;
-        });
+      _useSideMenuDarkModeToggle = value;
+    });
     _showYcCountdownSub =
         getPrefStream('showYcCountdown', true).listen((value) {
-          _showYcCountdown = value;
-        });
+      _showYcCountdown = value;
+    });
     _useNotificationSystemV2Sub =
         getPrefStream('useNotificationSystemV2', false).listen((value) {
-          _useNotificationSystemV2 = value;
-        });
+      _useNotificationSystemV2 = value;
+    });
 
     _amoledModeSub = getPrefStream("amoledMode", false).listen((value) {
       _amoledMode = value;
@@ -151,17 +149,17 @@ class BoolPref extends Pref<bool> {
 
     _useCreatorThemeOnMainPageSub =
         getPrefStream('useCreatorThemeOnMainPage', false).listen((value) {
-          _useCreatorThemeOnMainPage = value;
-        });
+      _useCreatorThemeOnMainPage = value;
+    });
     _useCreatorThemeSub =
         getPrefStream('useCreatorTheme', true).listen((value) {
-          _useCreatorTheme = value;
-        });
+      _useCreatorTheme = value;
+    });
 
     _useCreatorThemeDarkSub =
         getPrefStream('useCreatorThemeDark', true).listen((value) {
-          _useCreatorThemeDark = value;
-        });
+      _useCreatorThemeDark = value;
+    });
   }
 
   get saveData => _saveData;
@@ -171,7 +169,6 @@ class BoolPref extends Pref<bool> {
   get twitchSmallThumb => _twitchSmallThumb;
 
   get youtubeSmallThumb => _youtubeSmallThumb;
-
 
   get loadImages {
     return _loadImages;

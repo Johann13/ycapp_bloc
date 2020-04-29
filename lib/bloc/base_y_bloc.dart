@@ -69,14 +69,14 @@ class BaseYBloc {
     return true;
   }
 
-  Future<Null> initAnalytics(bool enable) async {
+  Future<void> initAnalytics(bool enable) async {
     await time('analytics', logTime, () async {
       bool analytics = await Prefs.getBool('analyticsPermission', false);
       await YAnalytics.enable(analytics && enable);
     });
   }
 
-  Future<Null> _sub() async {
+  Future<void> _sub() async {
     bool fcmPermission = await Prefs.getBool('fcmPermission', false);
 
     if (!fcmPermission) {
@@ -105,7 +105,7 @@ class BaseYBloc {
     return null;
   }
 
-  Future<Null> _init() async {
+  Future<void> _init() async {
     await Future.wait([
       time('creatorBloc.initList', logTime, () async {
         await creatorBloc.initList();
@@ -130,7 +130,7 @@ class BaseYBloc {
     }
   }
 
-  Future<Null> clearDatabase() async {
+  Future<void> clearDatabase() async {
     await forceUnsub();
     await Future.wait([
       twitchBloc.resetList(),
@@ -170,7 +170,7 @@ class BaseYBloc {
     await YMessaging.unsubscribeFromTopic(id);
   }
 
-  Future<Null> resetSubs() async {
+  Future<void> resetSubs() async {
     await forceUnsub();
     await forceSub();
   }

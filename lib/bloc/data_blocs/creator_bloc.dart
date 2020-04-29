@@ -34,7 +34,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
 
   CreatorBloc();
 
-  Future<Null> initList() async {
+  Future<void> initList() async {
     DateTime now = DateTime.now();
     print('creator initList start');
     this._creatorIdList = await _getCreatorSubscriptionPrefs();
@@ -189,7 +189,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   //endregion
 
   //region subscriptions
-  Future<Null> addCreator(String creatorId) async {
+  Future<void> addCreator(String creatorId) async {
     if (!_creatorIdList.contains(creatorId)) {
       _creatorIdList.add(creatorId);
       await _refreshList();
@@ -199,7 +199,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> addAllCreator(List<String> creatorIds) async {
+  Future<void> addAllCreator(List<String> creatorIds) async {
     creatorIds.forEach((id) {
       if (!_creatorIdList.contains(id)) {
         _creatorIdList.add(id);
@@ -215,7 +215,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     await YAnalytics.log('subscribeCreatorAll');
   }
 
-  Future<Null> removeCreator(String creatorId) async {
+  Future<void> removeCreator(String creatorId) async {
     if (_creatorIdList.contains(creatorId)) {
       _creatorIdList.remove(creatorId);
       await _refreshList();
@@ -225,14 +225,14 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> addCollaboration(String creatorId) async {
+  Future<void> addCollaboration(String creatorId) async {
     if (!_collaborationList.contains(creatorId)) {
       _collaborationList.add(creatorId);
       await YAnalytics.log('addCollab');
     }
   }
 
-  Future<Null> removeCollaboration(String creatorId) async {
+  Future<void> removeCollaboration(String creatorId) async {
     if (_collaborationList.contains(creatorId)) {
       _collaborationList.remove(creatorId);
       await YAnalytics.log('removeCollab',
@@ -240,7 +240,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> updateCollaboration(String creatorId) async {
+  Future<void> updateCollaboration(String creatorId) async {
     if (_collaborationList.contains(creatorId)) {
       await removeCollaboration(creatorId);
     } else {
@@ -249,7 +249,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     await _refreshList();
   }
 
-  Future<Null> addCollaborationInbox(String creatorId) async {
+  Future<void> addCollaborationInbox(String creatorId) async {
     if (!_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.add(creatorId);
       await _refreshList();
@@ -258,7 +258,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> removeCollaborationInbox(String creatorId) async {
+  Future<void> removeCollaborationInbox(String creatorId) async {
     if (_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.remove(creatorId);
       await _refreshList();
@@ -267,7 +267,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> updateCollaborationInbox(String creatorId) async {
+  Future<void> updateCollaborationInbox(String creatorId) async {
     if (_collaborationInboxList.contains(creatorId)) {
       await removeCollaborationInbox(creatorId);
     } else {
@@ -279,7 +279,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   //endregion
 
   //region other
-  Future<Null> _refreshList({bool setPref = true}) async {
+  Future<void> _refreshList({bool setPref = true}) async {
     _creatorIdsSubject.add(_creatorIdList);
     _collaborationSubject.add(_collaborationList);
     _collaborationInboxSubject.add(_collaborationInboxList);
@@ -290,7 +290,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     }
   }
 
-  Future<Null> resetList() {
+  Future<void> resetList() {
     _creatorIdList.clear();
     _collaborationList.clear();
     _collaborationInboxList.clear();

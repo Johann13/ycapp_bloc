@@ -14,7 +14,7 @@ class BoolPrefMobile extends BoolPref {
 
   StreamSubscription<YConnectivityResult> _connectivitySub;
 
-  Future<Null> init() async {
+  Future<void> init() async {
     await super.init();
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     androidInfo = await deviceInfo.androidInfo;

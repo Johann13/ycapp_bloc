@@ -8,7 +8,7 @@ class ConfigBlocMobile extends ConfigBloc {
   RemoteConfig remoteConfig;
 
   @override
-  Future<Null> init() async {
+  Future<void> init() async {
     try {
       remoteConfig = await _getRemoteConfig();
     } catch (e) {

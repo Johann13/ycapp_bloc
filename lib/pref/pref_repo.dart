@@ -9,7 +9,7 @@ abstract class Pref<T> {
   Map<String, List<String>> multiStreamNames = {};
   Map<String, T> valueMap = {};
 
-  Future<Null> init();
+  Future<void> init();
 
   Stream<T> getPrefStream(String prefName, T defaultValue) {
     if (!subjectMap.containsKey(prefName)) {
@@ -19,8 +19,8 @@ abstract class Pref<T> {
     return subjectMap[prefName];
   }
 
-  Future<Null> setPref(String prefName, T value) async {
-    await _setPref(prefName, value);
+  Future<void> setPref(String prefName, T value) async {
+    await setPrefDirect(prefName, value);
     if (!subjectMap.containsKey(prefName)) {
       subjectMap[prefName] = BehaviorSubject<T>();
     }
@@ -53,7 +53,7 @@ abstract class Pref<T> {
     return CombineLatestStream.list(list);
   }
 
-  Future<Null> setMultiplePrefs(List<String> prefNames, List<T> values) async {
+  Future<void> setMultiplePrefs(List<String> prefNames, List<T> values) async {
     List<Future> futures = [];
     if (!multiStreamNames.containsKey(prefNames.toString())) {
       multiStreamNames[prefNames.toString()] = prefNames;
@@ -64,8 +64,8 @@ abstract class Pref<T> {
     await Future.value(futures);
   }
 
-  Future<Null> _setValue(String prefName, T defaultValue) async {
-    T value = await _getPref(prefName, defaultValue);
+  Future<void> _setValue(String prefName, T defaultValue) async {
+    T value = await getPrefDirect(prefName, defaultValue);
     subjectMap[prefName].add(value);
     valueMap[prefName] = value;
   }
@@ -74,17 +74,17 @@ abstract class Pref<T> {
       List<String> prefNames, List<T> defaultValues) async {
     List<Future<T>> futures = [];
     for (int i = 0; i < prefNames.length; i++) {
-      futures.add(_getPref(prefNames[i], defaultValues[i]));
+      futures.add(getPrefDirect(prefNames[i], defaultValues[i]));
     }
     return Future.wait(futures);
   }
 
-  Future<T> _getPref(String prefName, T defaultValue);
+  Future<T> getPrefDirect(String prefName, T defaultValue);
 
-  Future<Null> _setPref(String prefName, T value);
+  Future<void> setPrefDirect(String prefName, T value);
 
   Future<T> getPref(String prefName, T defaultValue) {
-    return _getPref(prefName, defaultValue);
+    return getPrefDirect(prefName, defaultValue);
   }
 
   void dispose() {
@@ -101,16 +101,16 @@ class IntPref extends Pref<int> {
   int _gridSize;
 
   @override
-  Future<int> _getPref(String prefName, int defaultValue) {
+  Future<int> getPrefDirect(String prefName, int defaultValue) {
     return Prefs.getInt(prefName, defaultValue);
   }
 
   @override
-  Future<Null> _setPref(String prefName, int value) async {
+  Future<void> setPrefDirect(String prefName, int value) async {
     await Prefs.setInt(prefName, value);
   }
 
-  Future<Null> init() async {
+  Future<void> init() async {
     _gridSizeSub = getPrefStream('gridSize', 3).listen((data) {
       _gridSize = data;
     });
@@ -127,17 +127,17 @@ class IntPref extends Pref<int> {
 
 class DoublePref extends Pref<double> {
   @override
-  Future<double> _getPref(String prefName, double defaultValue) {
+  Future<double> getPrefDirect(String prefName, double defaultValue) {
     return Prefs.getDouble(prefName, defaultValue);
   }
 
   @override
-  Future<Null> _setPref(String prefName, double value) async {
+  Future<void> setPrefDirect(String prefName, double value) async {
     await Prefs.setDouble(prefName, value);
   }
 
   @override
-  Future<Null> init() async {
+  Future<void> init() async {
     return null;
   }
 }
@@ -149,16 +149,16 @@ class StringPref extends Pref<String> {
   StreamSubscription<String> _themeSub;
 
   @override
-  Future<String> _getPref(String prefName, String defaultValue) {
+  Future<String> getPrefDirect(String prefName, String defaultValue) {
     return Prefs.getString(prefName, defaultValue);
   }
 
   @override
-  Future<Null> _setPref(String prefName, String value) async {
+  Future<void> setPrefDirect(String prefName, String value) async {
     await Prefs.setString(prefName, value);
   }
 
-  Future<Null> init() async {
+  Future<void> init() async {
     _scheduleThemeSub = getPrefStream('scheduleTheme', 'yogs').listen((data) {
       _scheduleTheme = data;
     });
@@ -181,35 +181,35 @@ class StringPref extends Pref<String> {
 
 class StringListPref extends Pref<List<String>> {
   @override
-  Future<List<String>> _getPref(String prefName, List<String> defaultValue) {
+  Future<List<String>> getPrefDirect(String prefName, List<String> defaultValue) {
     return Prefs.getStringList(prefName);
   }
 
   @override
-  Future<Null> _setPref(String prefName, List<String> value) async {
+  Future<void> setPrefDirect(String prefName, List<String> value) async {
     await Prefs.setStringList(prefName, value);
   }
 
-  Future<Null> addItem(String prefName, String value) async {
-    List<String> list = await _getPref(prefName, []);
+  Future<void> addItem(String prefName, String value) async {
+    List<String> list = await getPrefDirect(prefName, []);
     list.add(value);
     await setPref(prefName, list);
   }
 
-  Future<Null> removeItem(String prefName, String value) async {
-    List<String> list = await _getPref(prefName, []);
+  Future<void> removeItem(String prefName, String value) async {
+    List<String> list = await getPrefDirect(prefName, []);
     list.remove(value);
     await setPref(prefName, list);
   }
 
-  Future<Null> removeAt(String prefName, int index) async {
-    List<String> list = await _getPref(prefName, []);
+  Future<void> removeAt(String prefName, int index) async {
+    List<String> list = await getPrefDirect(prefName, []);
     list.removeAt(index);
     await setPref(prefName, list);
   }
 
   @override
-  Future<Null> init() async {
+  Future<void> init() async {
     List<String> order = [
       'news',
       'my_jj_schedule',

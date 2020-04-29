@@ -69,14 +69,14 @@ class YBlocMobile extends BaseYBloc{
     return true;
   }
 
-  Future<Null> initAnalytics() async {
+  Future<void> initAnalytics() async {
     await time('analytics', () async {
       bool analytics = await Prefs.getBool('analyticsPermission', false);
       await YAnalytics.enable(analytics);
     });
   }
 
-  Future<Null> _sub() async {
+  Future<void> _sub() async {
     bool fcmPermission = await Prefs.getBool('fcmPermission', false);
 
     if (!fcmPermission) {
@@ -105,7 +105,7 @@ class YBlocMobile extends BaseYBloc{
     return null;
   }
 
-  Future<Null> _init() async {
+  Future<void> _init() async {
     await Future.wait([
       time('creatorBloc.initList', () async {
         await creatorBloc.initList();
@@ -130,7 +130,7 @@ class YBlocMobile extends BaseYBloc{
     }
   }
 
-  Future<Null> clearDatabase() async {
+  Future<void> clearDatabase() async {
     await forceUnsub();
     await Future.wait([
       twitchBloc.resetList(),
@@ -170,7 +170,7 @@ class YBlocMobile extends BaseYBloc{
     await YMessaging.unsubscribeFromTopic(id);
   }
 
-  Future<Null> resetSubs() async {
+  Future<void> resetSubs() async {
     await forceUnsub();
     await forceSub();
   }

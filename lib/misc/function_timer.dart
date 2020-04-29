@@ -1,4 +1,4 @@
-typedef Future<Null> TimeFunction();
+typedef Future<void> TimeFunction();
 
 Future<Duration> time(String name, bool logTime, TimeFunction f) async {
   if(!logTime){

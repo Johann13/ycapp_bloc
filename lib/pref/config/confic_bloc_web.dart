@@ -7,7 +7,7 @@ class ConfigBlocWeb extends ConfigBloc {
   fb.RemoteConfig remoteConfig;
 
   @override
-  Future<Null> init() async {
+  Future<void> init() async {
     try {
       remoteConfig = await _getRemoteConfig();
     } catch (e) {

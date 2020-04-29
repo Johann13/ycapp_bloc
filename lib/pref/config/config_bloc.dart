@@ -28,7 +28,7 @@ abstract class ConfigBloc {
     'JjShowSchedule': true,
   };
 
-  Future<Null> init();
+  Future<void> init();
 
   String getString(String key);
 

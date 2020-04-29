@@ -71,7 +71,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
 
   //endregion
 
-  Future<Null> initList() async {
+  Future<void> initList() async {
     /*
     bool isFirstStart1_6 =
         await Prefs.getBool('isFirstSettingsStart1_6_${inboxPrefName()}', true);
@@ -262,7 +262,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     }
   }
 
-  Future<Null> _subscribe(String id) async {
+  Future<void> _subscribe(String id) async {
     if (!_subscriptionsList.contains(id)) {
       _subscriptionsList.add(id);
       await _sub(id);
@@ -273,7 +273,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     }
   }
 
-  Future<Null> subscribeToAll(List<String> ids) async {
+  Future<void> subscribeToAll(List<String> ids) async {
     await Future.wait(ids.map((id) async {
       if (!isSubscribedTo(id)) {
         print('sub $id');
@@ -304,7 +304,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     }
   }
 
-  Future<Null> unsubscribeFromAll(List<String> ids) async {
+  Future<void> unsubscribeFromAll(List<String> ids) async {
     await Future.wait(ids.map((id) async {
       if (isSubscribedTo(id)) {
         _subscriptionsList.remove(id);
@@ -321,7 +321,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     await YAnalytics.log('unsubscribeAll');
   }
 
-  Future<Null> _subscribeToNotification(String id) async {
+  Future<void> _subscribeToNotification(String id) async {
     if (!_notificationsList.contains(id)) {
       _notificationsList.add(id);
       await YAnalytics.log('subscribeNoti', parameters: {'id': id});
@@ -329,7 +329,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   }
 
   // ignore: unused_element
-  Future<Null> _subscribeAllToNotification(List<String> ids) async {
+  Future<void> _subscribeAllToNotification(List<String> ids) async {
     ids.forEach((id) {
       if (!getsNotificationsFrom(id)) {
         _notificationsList.add(id);
@@ -339,7 +339,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     await YAnalytics.log('subscribeNotiAll');
   }
 
-  Future<Null> _unsubscribeFromNotification(String id) async {
+  Future<void> _unsubscribeFromNotification(String id) async {
     if (_notificationsList.contains(id)) {
       _notificationsList.remove(id);
       await YAnalytics.log('unsubscribeNoti', parameters: {'id': id});
@@ -347,7 +347,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   }
 
   // ignore: unused_element
-  Future<Null> _unsubscribeAllFromNotification(List<String> ids) async {
+  Future<void> _unsubscribeAllFromNotification(List<String> ids) async {
     ids.forEach((id) {
       if (getsNotificationsFrom(id)) {
         _notificationsList.remove(id);
@@ -358,7 +358,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     await YAnalytics.log('unsubscribeNotiAll');
   }
 
-  Future<Null> _subscribeToInbox(String id) async {
+  Future<void> _subscribeToInbox(String id) async {
     if (!_inboxList.contains(id)) {
       _inboxList.add(id);
       await YAnalytics.log('subscribeInbox', parameters: {'id': id});
@@ -382,7 +382,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     }
   }
 
-  Future<Null> _unsubscribeFromInbox(String id) async {
+  Future<void> _unsubscribeFromInbox(String id) async {
     if (_inboxList.contains(id)) {
       _inboxList.remove(id);
       await YAnalytics.log('unsubscribeInbox', parameters: {'id': id});
@@ -390,7 +390,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   }
 
   // ignore: unused_element
-  Future<Null> _unsubscribeAllFromInbox(List<String> ids) async {
+  Future<void> _unsubscribeAllFromInbox(List<String> ids) async {
     ids.forEach((id) {
       if (getsInboxFrom(id)) {
         _inboxList.remove(id);
@@ -412,18 +412,18 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
         .map((id) => YMessaging.unsubscribeFromTopic(id)));
   }
 
-  Future<Null> _sub(String id) async {
+  Future<void> _sub(String id) async {
     await YMessaging.subscribeToTopic(id);
   }
 
-  Future<Null> _unsub(String id) async {
+  Future<void> _unsub(String id) async {
     await YMessaging.unsubscribeFromTopic(id);
   }
 
 //endregion
 
   //region util
-  Future<Null> _refreshList({bool setPrefs = true}) async {
+  Future<void> _refreshList({bool setPrefs = true}) async {
     DateTime now = DateTime.now();
     print('_refreshList start');
     _subscriptionsSubject.add(_subscriptionsList);
@@ -443,7 +443,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     print('_refreshList start ${DateTime.now().difference(now)}');
   }
 
-  Future<Null> resetList() {
+  Future<void> resetList() {
     _subscriptionsList.clear();
     _notificationsList.clear();
     _inboxList.clear();

@@ -53,7 +53,7 @@ abstract class SettingsBloc<B extends BoolPref, C extends ConfigBloc> {
 
   Future<void> logUser();
 
-  Future<Null> _initRemoteConfig() async {
+  Future<void> _initRemoteConfig() async {
     await time('remoteConfig.init()', logTime, () async {
       await remoteConfig.init();
     });
