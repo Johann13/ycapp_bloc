@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_foundation/model/schedule/jj_schedule.dart';
 
 class JJScheduleBloc {
@@ -47,7 +47,7 @@ class JJScheduleBloc {
       }));
     }
     List<Stream<JJSlot>> streamList = ids.map((id) => getSlot(id)).toList();
-    return StreamZip(streamList).map((list) {
+    return CombineLatestStream.list(streamList).map((list) {
       list.sort((a, b) => a.start.compareTo(b.start));
       return list
           .where((v) => v != null)

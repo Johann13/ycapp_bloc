@@ -402,7 +402,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   }
 
   Future subscribeAll() async {
-    print('subscribeAll $_subscriptionsPrefName pushy done');
+    print('subscribeAll $_subscriptionsPrefName done');
     return Future.wait(
         subscriptionsList.map((id) => YMessaging.subscribeToTopic(id)));
   }

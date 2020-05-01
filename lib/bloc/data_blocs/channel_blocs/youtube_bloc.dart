@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/channel_bloc.dart';
 import 'package:ycapp_foundation/model/channel/youtube_channel.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
@@ -48,7 +48,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         return [];
       }));
     }
-    return StreamZip<List<Video>>(
+    return CombineLatestStream.list<List<Video>>(
             youtubeIds.map((youtubeId) => getVideos(youtubeId)))
         .map((lists) => lists.where((list) => list != null).toList())
         .map((lists) => lists.expand((video) => video).toList());

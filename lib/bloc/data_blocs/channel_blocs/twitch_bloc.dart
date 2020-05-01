@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
+import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_bloc/bloc/data_blocs/channel_blocs/channel_bloc.dart';
 import 'package:ycapp_foundation/model/channel/twitch_channel.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
@@ -53,7 +53,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         return [];
       }));
     }
-    return StreamZip<List<TwitchVideo>>(
+    return CombineLatestStream.list<List<TwitchVideo>>(
         twitchIds.map((twitchId) => getArchives(twitchId))).map((value) {
       List<TwitchVideo> list = value.expand((video) => video).toList();
       list.sort((v1, v2) => v1.publishedAt.compareTo(v2.publishedAt));
@@ -75,7 +75,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         return [];
       }));
     }
-    return StreamZip<List<TwitchVideo>>(
+    return CombineLatestStream.list<List<TwitchVideo>>(
         twitchIds.map((twitchId) => getHighlights(twitchId))).map((value) {
       List<TwitchVideo> list = value.expand((video) => video).toList();
       list.sort((v1, v2) => v1.publishedAt.compareTo(v2.publishedAt));
@@ -97,7 +97,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         return [];
       }));
     }
-    return StreamZip<List<TwitchVideo>>(
+    return CombineLatestStream.list<List<TwitchVideo>>(
         twitchIds.map((twitchId) => getUploads(twitchId))).map((value) {
       List<TwitchVideo> list = value.expand((video) => video).toList();
       list.sort((v1, v2) => v1.publishedAt.compareTo(v2.publishedAt));

@@ -299,7 +299,6 @@ class CreatorBloc extends FirestoreBloc<Creator> {
 
   Future subscribeAll() async {
     print('subscribeAll creator');
-    print('subscribeAll creator pushy done');
     return Future.wait(
         creatorIdList.map((id) => YMessaging.subscribeToTopic('all')));
   }
