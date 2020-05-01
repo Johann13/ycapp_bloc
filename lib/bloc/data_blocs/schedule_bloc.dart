@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:async/async.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_foundation/model/schedule/combined_schedule.dart';
 import 'package:ycapp_foundation/model/schedule/schedule.dart';
 
@@ -67,7 +67,7 @@ class ScheduleBloc {
     }
     List<Stream<List<ScheduleSlot>>> streamList =
         ids.map((id) => getSlots(id)).toList();
-    return StreamZip(streamList)
+    return CombineLatestStream.list(streamList)
         .map((list) => list.where((v) => v != null).toList())
         .map((list) => list.expand((l) => l).toList())
         .map((list) => CombinedSchedule.withList(list));
@@ -99,5 +99,29 @@ class ScheduleBloc {
         .toList();
     //print('slots ${slots.length}');
     return slots;
+  }
+
+  Stream<Schedule> getScheduleDay(List<String> twitchIds, int day,
+      [bool filter(ScheduleSlot element)]) {
+    return CombineLatestStream.list(twitchIds.map((id) {
+      return Firestore.instance
+          .collection('TwitchChannel')
+          .document(id)
+          .collection('Schedule')
+          .where('day', isEqualTo: day)
+          .snapshots()
+          .map((query) {
+        return query.documents.map((doc) {
+          return ScheduleSlot.fromMap(id, doc.data);
+        }).toList();
+      });
+    }))
+        .map((event) => event.expand((element) => element).where((e) {
+              if (filter != null) {
+                return filter(e);
+              }
+              return true;
+            }).toList())
+        .map((event) => Schedule('day_$day', event));
   }
 }
