@@ -45,7 +45,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   final _subscriptionsSubject = BehaviorSubject<List<String>>();
   List<String> _subscriptionsList = [];
 
-  Stream<List<String>> get subscriptions => _subscriptionsSubject.asBroadcastStream();
+  Stream<List<String>> get subscriptions => _subscriptionsSubject.stream.asBroadcastStream();
 
   List<String> get subscriptionsList => _subscriptionsList;
 
@@ -54,7 +54,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   final _notificationsSubject = BehaviorSubject<List<String>>();
   List<String> _notificationsList = [];
 
-  Stream<List<String>> get notifications => _notificationsSubject.asBroadcastStream();
+  Stream<List<String>> get notifications => _notificationsSubject.stream.asBroadcastStream();
 
   List<String> get notificationsList => _notificationsList;
 
