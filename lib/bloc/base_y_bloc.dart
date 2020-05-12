@@ -52,10 +52,14 @@ class BaseYBloc {
       await Future.wait([
         time('main', logTime, () async {
           await time('Firestore.instance.settings', logTime, () async {
-            await Firestore.instance.settings(
-              persistenceEnabled: true,
-              cacheSizeBytes: 5 * 1000 * 1000,
-            );
+            try {
+              await Firestore.instance.settings(
+                persistenceEnabled: true,
+                cacheSizeBytes: 5 * 1000 * 1000,
+              );
+            }catch(e){
+              print('BaseYBloc Firestore.instance.settings');
+            }
           });
           await time('_init()', logTime, () async {
             await _init();
