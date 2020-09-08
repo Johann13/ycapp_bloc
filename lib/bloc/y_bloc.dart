@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
@@ -32,7 +33,7 @@ class YBloc {
   final bool logTime;
 
   YBloc({
-    this.logTime = false,
+    this.logTime = kDebugMode,
   }) {
     print('YBloc');
     creator = CreatorBloc();
