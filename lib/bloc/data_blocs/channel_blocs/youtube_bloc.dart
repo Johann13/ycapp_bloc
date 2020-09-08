@@ -21,24 +21,24 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
 
   //region videos
   Stream<List<Video>> getVideos(String youtubeId) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .snapshots()
         .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data))
+            .map((doc) => Video.fromMap(doc.document.data()))
             .toList());
   }
 
   Stream<List<Video>> getLatestMainChannelVideo(String creatorId) {
     print(creatorId);
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('YoutubeVideo')
         .where('creator', arrayContains: creatorId)
         .orderBy('publisedAt', descending: true)
         .snapshots()
         .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data))
+            .map((doc) => Video.fromMap(doc.document.data()))
             .toList());
   }
 
@@ -59,7 +59,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
     String videoId, {
     int limit = 2,
   }) async {
-    QuerySnapshot query = await Firestore.instance
+    QuerySnapshot query = await FirebaseFirestore.instance
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .orderBy('videoId', descending: true)
@@ -68,24 +68,24 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .orderBy('publishedAt', descending: true)
         .getDocuments();
     return query.documentChanges
-        .map((doc) => Video.fromMap(doc.document.data))
+        .map((doc) => Video.fromMap(doc.document.data()))
         .toList();
   }
 
   Future<Video> getVideo(String videoId) async {
-    DocumentSnapshot doc = await Firestore.instance
+    DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('YoutubeVideo')
         .document(videoId)
         .get();
-    return Video.fromMap(doc.data);
+    return Video.fromMap(doc.data());
   }
 
   Stream<Video> getVideoStream(String videoId) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('YoutubeVideo')
         .document(videoId)
         .snapshots()
-        .map((doc) => Video.fromMap(doc.data));
+        .map((doc) => Video.fromMap(doc.data()));
   }
 
   Stream<List<Video>> getSubscribedVideos() {

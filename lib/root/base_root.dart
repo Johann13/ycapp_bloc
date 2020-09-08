@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:ycapp_analytics/ycapp_analytics.dart';
-import 'package:ycapp_bloc/bloc/base_y_bloc.dart';
+import 'package:ycapp_bloc/bloc/y_bloc.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_bloc/misc/post_init.dart';
@@ -16,7 +16,7 @@ class BaseRoot extends StatelessWidget {
   final WidgetBuilder loading;
   final ErrorBuilder error;
   final InitTimeDB initTimeDB;
-  final BaseYBloc yBloc;
+  final YBloc yBloc;
   final SettingsBloc settingsBloc;
   final PostInit postInit;
   final bool analytics;

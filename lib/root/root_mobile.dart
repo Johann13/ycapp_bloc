@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:timezone/timezone.dart';
-import 'package:ycapp_bloc/bloc/y_bloc_mobile.dart';
+import 'package:ycapp_bloc/bloc/y_bloc.dart';
 import 'package:ycapp_bloc/misc/post_init.dart';
 import 'package:ycapp_bloc/pref/settings_bloc_mobile.dart';
 import 'package:ycapp_bloc/root/base_root.dart';
@@ -29,7 +29,7 @@ class RootMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseRoot(
       analytics: analytics,
-      yBloc: YBlocMobile(),
+      yBloc: YBloc(),
       settingsBloc: SettingsBlocMobile(),
       initTimeDB: initTimeDB != null
           ? initTimeDB(context)

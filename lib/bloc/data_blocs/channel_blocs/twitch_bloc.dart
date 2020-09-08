@@ -31,7 +31,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
   //region videos
   Stream<List<TwitchVideo>> getTwitchVideos(String twitchId, String type,
       [int last = 5]) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('TwitchVideo')
         .where('twitchId', isEqualTo: twitchId)
         .where('type', isEqualTo: type)
@@ -39,7 +39,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         .limit(last)
         .snapshots()
         .map((query) => query.documentChanges
-            .map((changes) => TwitchVideo.fromMap(changes.document.data))
+            .map((changes) => TwitchVideo.fromMap(changes.document.data()))
             .toList());
   }
 
@@ -112,14 +112,14 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
   //endregion
 
   Stream<List<TwitchClip>> getClips(String twitchId) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('TwitchClips')
         .where('twitchId', isEqualTo: twitchId)
         .orderBy('publishedAt', descending: true)
         .limit(5)
         .snapshots()
         .map((query) => query.documentChanges
-            .map((changes) => TwitchClip.fromMap(changes.document.data))
+            .map((changes) => TwitchClip.fromMap(changes.document.data()))
             .toList());
   }
 

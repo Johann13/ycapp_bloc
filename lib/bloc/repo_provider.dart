@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ycapp_bloc/bloc/base_y_bloc.dart';
+import 'package:ycapp_bloc/bloc/y_bloc.dart';
 
 class RepoProvider extends StatefulWidget {
   final Widget child;
-  final BaseYBloc yBloc;
+  final YBloc yBloc;
 
   RepoProvider({
     Key key,
@@ -14,12 +14,12 @@ class RepoProvider extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _RepoProviderState();
 
-  static BaseYBloc of(BuildContext context) =>
+  static YBloc of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<_RepoProvider>().bloc;
 }
 
 class _RepoProviderState extends State<RepoProvider> {
-  BaseYBloc get _yBloc => widget.yBloc;
+  YBloc get _yBloc => widget.yBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +37,9 @@ class _RepoProviderState extends State<RepoProvider> {
 }
 
 class _RepoProvider extends InheritedWidget {
-  final BaseYBloc bloc;
+  final YBloc bloc;
 
-  _RepoProvider({Key key, @required Widget child, @required BaseYBloc bloc})
+  _RepoProvider({Key key, @required Widget child, @required YBloc bloc})
       : bloc = bloc,
         super(key: key, child: child);
 

@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'package:rxdart/rxdart.dart';
+
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/ui/loader/pref_data_loader.dart';
 import 'package:ycapp_foundation/model/channel/twitch_channel.dart';
@@ -84,7 +85,7 @@ class TwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchStreamBuilder(
-        channel: RepoProvider.of(context).twitchBloc.getChannel(twitchId),
+        channel: RepoProvider.of(context).twitch.getChannel(twitchId),
         builder: builder,
         error: error,
         loading: loading,
@@ -108,7 +109,7 @@ class TwitchListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchListStream(
-        channel: RepoProvider.of(context).twitchBloc.getChannelByIds(twitchIds),
+        channel: RepoProvider.of(context).twitch.getChannelByIds(twitchIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -131,8 +132,8 @@ class AllSubscribedTwitchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchListStream(
-        channel: RepoProvider.of(context).twitchBloc.subscriptions.switchMap((ids) =>
-            RepoProvider.of(context).twitchBloc.getChannelByIds(ids)),
+        channel: RepoProvider.of(context).twitch.subscriptions.switchMap(
+            (ids) => RepoProvider.of(context).twitch.getChannelByIds(ids)),
         builder: builder,
         error: error,
         loading: loading,
@@ -155,7 +156,7 @@ class TwitchUploadsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchVideoListStream(
-        videos: RepoProvider.of(context).twitchBloc.getAllUploads(twitchIds),
+        videos: RepoProvider.of(context).twitch.getAllUploads(twitchIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -177,7 +178,7 @@ class TwitchArchivesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchVideoListStream(
-        videos: RepoProvider.of(context).twitchBloc.getAllArchives(twitchIds),
+        videos: RepoProvider.of(context).twitch.getAllArchives(twitchIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -199,7 +200,7 @@ class TwitchHighlightsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => TwitchVideoListStream(
-        videos: RepoProvider.of(context).twitchBloc.getAllHighlights(twitchIds),
+        videos: RepoProvider.of(context).twitch.getAllHighlights(twitchIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -222,8 +223,7 @@ class TwitchSubscribedStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream:
-          RepoProvider.of(context).twitchBloc.isSubscribedToStream(twitchId),
+      stream: RepoProvider.of(context).twitch.isSubscribedToStream(twitchId),
       builder: builder,
       loading: loading,
       error: error,
@@ -247,9 +247,8 @@ class TwitchNotificationStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream: RepoProvider.of(context)
-          .twitchBloc
-          .getsNotificationsFromStream(twitchId),
+      stream:
+          RepoProvider.of(context).twitch.getsNotificationsFromStream(twitchId),
       builder: builder,
       loading: loading,
       error: error,
@@ -273,7 +272,7 @@ class TwitchInboxStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream: RepoProvider.of(context).twitchBloc.getsInboxFromStream(twitchId),
+      stream: RepoProvider.of(context).twitch.getsInboxFromStream(twitchId),
       builder: builder,
       loading: loading,
       error: error,

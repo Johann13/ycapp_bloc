@@ -6,38 +6,38 @@ import 'package:ycapp_foundation/model/schedule/jj_schedule.dart';
 
 class JJScheduleBloc {
   Stream<JJSchedule> getSchedule() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .snapshots()
         .map((query) {
       List<JJSlot> slots =
-          query.documents.map((doc) => JJSlot.fromMap(doc.data)).toList();
+          query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList();
       JJSchedule schedule = JJSchedule(slots);
       return schedule;
     });
   }
 
   Future<List<JJSlot>> getRelatedSlots(String creatorId) async {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
         .getDocuments()
         .then((query) =>
-            query.documents.map((doc) => JJSlot.fromMap(doc.data)).toList());
+            query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList());
   }
 
   Stream<JJSlot> getSlot(String id) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .document(id)
         .snapshots()
-        .map((doc) => JJSlot.fromMap(doc.data));
+        .map((doc) => JJSlot.fromMap(doc.data()));
   }
 
   Stream<List<JJSlot>> getSlotsByIds(List<String> ids) {

@@ -69,7 +69,7 @@ class YoutubeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => YoutubeStream(
-        channel: RepoProvider.of(context).youtubeBloc.getChannel(youtubeId),
+        channel: RepoProvider.of(context).youtube.getChannel(youtubeId),
         builder: builder,
         error: error,
         loading: loading,
@@ -92,7 +92,7 @@ class YoutubeVideoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YStreamBuilder<Video>(
-      stream: RepoProvider.of(context).youtubeBloc.getVideoStream(videoId),
+      stream: RepoProvider.of(context).youtube.getVideoStream(videoId),
       builder: builder,
       loading: loading,
       error: error,
@@ -117,8 +117,7 @@ class YoutubeListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => YoutubeListStream(
-        channel:
-            RepoProvider.of(context).youtubeBloc.getChannelByIds(youtubeIds),
+        channel: RepoProvider.of(context).youtube.getChannelByIds(youtubeIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -142,8 +141,8 @@ class AllSubscribedYoutubeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return YoutubeListStream(
-      channel: RepoProvider.of(context).youtubeBloc.subscriptions.switchMap(
-          (ids) => RepoProvider.of(context).youtubeBloc.getChannelByIds(ids)),
+      channel: RepoProvider.of(context).youtube.subscriptions.switchMap(
+          (ids) => RepoProvider.of(context).youtube.getChannelByIds(ids)),
       builder: builder,
       error: error,
       loading: loading,
@@ -167,7 +166,7 @@ class YoutubeVideoListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => YoutubeVideoListStream(
-        channel: RepoProvider.of(context).youtubeBloc.getAllVideos(youtubeIds),
+        channel: RepoProvider.of(context).youtube.getAllVideos(youtubeIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -190,8 +189,7 @@ class YoutubeSubscribedStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream:
-          RepoProvider.of(context).youtubeBloc.isSubscribedToStream(youtubeId),
+      stream: RepoProvider.of(context).youtube.isSubscribedToStream(youtubeId),
       builder: builder,
       loading: loading,
       error: error,
@@ -216,7 +214,7 @@ class YoutubeNotificationStream extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
       stream: RepoProvider.of(context)
-          .youtubeBloc
+          .youtube
           .getsNotificationsFromStream(youtubeId),
       builder: builder,
       loading: loading,
@@ -241,8 +239,7 @@ class YoutubeInboxStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream:
-          RepoProvider.of(context).youtubeBloc.getsInboxFromStream(youtubeId),
+      stream: RepoProvider.of(context).youtube.getsInboxFromStream(youtubeId),
       builder: builder,
       loading: loading,
       error: error,

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_ui/firestore_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/ui/loader/pref_data_loader.dart';
@@ -52,7 +54,7 @@ class CreatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CreatorStream(
-        creator: RepoProvider.of(context).creatorBloc.getCreator(creatorId),
+        creator: RepoProvider.of(context).creator.getCreator(creatorId),
         builder: builder,
         error: error,
         loading: loading,
@@ -76,8 +78,7 @@ class CreatorListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CreatorListStream(
-        creator:
-            RepoProvider.of(context).creatorBloc.getCreatorByIds(creatorIds),
+        creator: RepoProvider.of(context).creator.getCreatorByIds(creatorIds),
         builder: builder,
         error: error,
         loading: loading,
@@ -100,7 +101,7 @@ class AllSubscribedCreatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => CreatorListWidget(
-        creatorIds: RepoProvider.of(context).creatorBloc.creatorIdList,
+        creatorIds: RepoProvider.of(context).creator.creatorIdList,
         builder: builder,
         error: error,
         loading: loading,
@@ -124,9 +125,8 @@ class SubscribeToCreatorStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream: RepoProvider.of(context)
-          .creatorBloc
-          .getsCollaborationStream(creatorId),
+      stream:
+          RepoProvider.of(context).creator.getsCollaborationStream(creatorId),
       builder: builder,
       error: error,
       loading: loading,
@@ -150,9 +150,8 @@ class GetsCollaborationFromCreatorStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
-      stream: RepoProvider.of(context)
-          .creatorBloc
-          .getsCollaborationStream(creatorId),
+      stream:
+          RepoProvider.of(context).creator.getsCollaborationStream(creatorId),
       builder: builder,
       error: error,
       loading: loading,
@@ -177,11 +176,48 @@ class GetsCollaborationInboxFromCreatorStream extends StatelessWidget {
   Widget build(BuildContext context) {
     return BoolStreamBuilder(
       stream: RepoProvider.of(context)
-          .creatorBloc
+          .creator
           .getsCollaborationInboxStream(creatorId),
       builder: builder,
       error: error,
       loading: loading,
+    );
+  }
+}
+
+typedef Widget CreatorBuilder(
+  BuildContext context,
+  Creator creator,
+  int index,
+);
+
+class AnimatedCreatorListStream extends StatelessWidget {
+  final CreatorBuilder builder;
+
+  const AnimatedCreatorListStream({
+    Key key,
+    @required this.builder,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FirestoreAnimatedList(
+      query: RepoProvider.of(context).creator.collection,
+      itemBuilder: (
+        BuildContext context,
+        DocumentSnapshot snapshot,
+        Animation<double> animation,
+        int index,
+      ) {
+        return FadeTransition(
+          opacity: animation,
+          child: builder(
+            context,
+            RepoProvider.of(context).creator.fromMap(snapshot.data()),
+            index,
+          ),
+        );
+      },
     );
   }
 }

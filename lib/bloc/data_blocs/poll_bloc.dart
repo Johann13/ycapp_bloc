@@ -5,12 +5,12 @@ import 'package:ycapp_foundation/model/poll.dart';
 
 class PollBloc {
   Stream<List<Poll>> getPolls() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Poll')
         .orderBy('createdAt', descending: false)
         .snapshots()
         .map((querySnapshot) => querySnapshot.documentChanges
-            .map((change) => Poll.fromMap(change.document.data))
+            .map((change) => Poll.fromMap(change.document.data()))
             .toList());
   }
 }

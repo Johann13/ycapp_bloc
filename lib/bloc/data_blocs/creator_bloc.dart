@@ -49,47 +49,47 @@ class CreatorBloc extends FirestoreBloc<Creator> {
 
 
   Stream<List<Creator>> getAllCreator() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
             .where((change) => change != null)
-            .map((change) => fromMap(change.data))
+            .map((change) => fromMap(change.data()))
             .where((v) => v != null)
             .toList())
         .asBroadcastStream();
   }
 
   Stream<List<Creator>> getAllYCreator() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
-            .map((change) => fromMap(change.data))
+            .map((change) => fromMap(change.data()))
             .where((v) => v != null)
             .toList())
         .asBroadcastStream();
   }
 
   Future<List<Creator>> getAllYCreatorOnce() async {
-    QuerySnapshot snap = await Firestore.instance
+    QuerySnapshot snap = await FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .getDocuments();
     return snap.documents
         .where((v) => v != null)
-        .where((v) => v.data != null)
-        .map((change) => fromMap(change.data))
+        .where((v) => v.data() != null)
+        .map((change) => fromMap(change.data()))
         .toList();
   }
 
   Stream<List<Creator>> getAllFriendChannel() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .where('type', isEqualTo: 4)
@@ -97,14 +97,14 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
             .where((v) => v != null)
-            .where((v) => v.data != null)
-            .map((change) => fromMap(change.data))
+            .where((v) => v.data() != null)
+            .map((change) => fromMap(change.data()))
             .toList())
         .asBroadcastStream();
   }
 
   Stream<List<Creator>> getAllFanChannel() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .where('type', isEqualTo: 3)
@@ -112,14 +112,14 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
             .where((v) => v != null)
-            .where((v) => v.data != null)
-            .map((change) => fromMap(change.data))
+            .where((v) => v.data() != null)
+            .map((change) => fromMap(change.data()))
             .toList())
         .asBroadcastStream();
   }
 
   Stream<List<Creator>> getAllEditorChannel() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .where('type', isEqualTo: 2)
@@ -127,8 +127,8 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
             .where((v) => v != null)
-            .where((v) => v.data != null)
-            .map((change) => fromMap(change.data))
+            .where((v) => v.data() != null)
+            .map((change) => fromMap(change.data()))
             .toList())
         .asBroadcastStream();
   }

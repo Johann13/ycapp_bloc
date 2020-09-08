@@ -140,32 +140,32 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
   @override
   Future<List<ScheduleSlot>> getRelatedSlots(
       String creatorId, String twitchId) async {
-    QuerySnapshot query = await Firestore.instance
+    QuerySnapshot query = await FirebaseFirestore.instance
         .collection('TwitchChannel')
         .document(twitchId)
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
         .getDocuments();
     List<ScheduleSlot> slots = query.documents
-        .map((change) => ScheduleSlot.fromMap(twitchId, change.data))
+        .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
         .toList();
     return slots;
   }
 
   @override
   Stream<ScheduleSlot> getSlot(String id, String twitchId) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('TwitchChannel')
         .document(twitchId)
         .collection('Schedule')
         .document(id)
         .snapshots()
-        .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data));
+        .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()));
   }
 
   @override
   Stream<List<ScheduleSlot>> getSlots(String twitchId) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('TwitchChannel')
         .document(twitchId)
         .collection('Schedule')
@@ -173,14 +173,14 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
         .orderBy('slot', descending: false)
         .snapshots()
         .map((querySnapshot) => querySnapshot.documents
-            .where((v) => v.data != null)
-            .map((change) => ScheduleSlot.fromMap(twitchId, change.data))
+            .where((v) => v.data() != null)
+            .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
             .toList());
   }
 
   @override
   Future<List<ScheduleSlot>> getSlotsOnce(String twitchId) async {
-    QuerySnapshot snapshot = await Firestore.instance
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('TwitchChannel')
         .document(twitchId)
         .collection('Schedule')
@@ -188,7 +188,7 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
         .orderBy('slot', descending: false)
         .getDocuments();
     return snapshot.documents
-        .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data))
+        .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()))
         .toList();
   }
 }
@@ -196,14 +196,14 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
 class JJScheduleFirestoreBloc extends JJScheduleBlocBase {
   @override
   Stream<JJSchedule> getSchedule() {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .snapshots()
         .map((query) {
       List<JJSlot> slots =
-          query.documents.map((doc) => JJSlot.fromMap(doc.data)).toList();
+          query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList();
       JJSchedule schedule = JJSchedule(slots);
       return schedule;
     });
@@ -211,24 +211,24 @@ class JJScheduleFirestoreBloc extends JJScheduleBlocBase {
 
   @override
   Future<List<JJSlot>> getRelatedSlots(String creatorId) async {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
         .getDocuments()
         .then((query) =>
-            query.documents.map((doc) => JJSlot.fromMap(doc.data)).toList());
+            query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList());
   }
 
   @override
   Stream<JJSlot> getSlot(String id) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('JingleJam')
         .document('2019')
         .collection('Schedule')
         .document(id)
         .snapshots()
-        .map((doc) => JJSlot.fromMap(doc.data));
+        .map((doc) => JJSlot.fromMap(doc.data()));
   }
 }

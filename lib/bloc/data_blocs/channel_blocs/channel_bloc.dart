@@ -32,9 +32,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   String notificationPrefName();
 
   String inboxPrefName();
-
-  T fromMap(Map map);
-
+  
   //region fields
   String get _subscriptionsPrefName => subscriptionPrefName();
 
@@ -454,11 +452,11 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
 
   //region data
 
-  Stream<List<T>> getAllChannel() => Firestore.instance
+  Stream<List<T>> getAllChannel() => FirebaseFirestore.instance
       .collection(collectionPath())
       .where('visible', isEqualTo: true)
       .snapshots()
-      .map((query) => query.documents.map((doc) => fromMap(doc.data)).toList())
+      .map((query) => query.documents.map((doc) => fromMap(doc.data())).toList())
       .asBroadcastStream();
 
   Stream<T> getChannel(String channelId) => getById(channelId);

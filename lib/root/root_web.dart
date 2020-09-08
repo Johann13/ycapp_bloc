@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:timezone/browser.dart' as tz;
-import 'package:ycapp_bloc/bloc/y_bloc_mobile.dart';
+import 'package:ycapp_bloc/bloc/y_bloc.dart';
 import 'package:ycapp_bloc/misc/post_init.dart';
 import 'package:ycapp_bloc/pref/settings_bloc_web.dart';
 import 'package:ycapp_bloc/root/base_root.dart';
@@ -28,7 +28,7 @@ class RootWeb extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseRoot(
       analytics: analytics,
-      yBloc: YBlocMobile(),
+      yBloc: YBloc(),
       settingsBloc: SettingsBlocWeb(),
       initTimeDB: initTimeDB != null
           ? initTimeDB(context)
