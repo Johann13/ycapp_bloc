@@ -37,6 +37,7 @@ dev_dependencies:
   auto_size_text: ^2.1.0
   intl: ^0.16.1
   timezone: ^0.5.6
+  connectivity: ^2.0.1
 
   flutter_async_builder: ^0.0.1+1
   reactive_preferences:

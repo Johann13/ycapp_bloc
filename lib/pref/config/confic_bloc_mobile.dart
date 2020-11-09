@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_async_builder/flutter_async_builder.dart';
 import 'package:ycapp_bloc/pref/config/config_bloc.dart';
-import 'package:ycapp_connectivity/ycappconnectivity.dart';
 
 class ConfigBlocMobile extends ConfigBloc {
   RemoteConfig remoteConfig;
@@ -20,7 +20,8 @@ class ConfigBlocMobile extends ConfigBloc {
   }
 
   Future<RemoteConfig> _getRemoteConfig() async {
-    bool wifi = await YConnectivity().isConnectedWifi();
+    bool wifi =
+        (await Connectivity().checkConnectivity()) == ConnectivityResult.wifi;
     if (!wifi) {
       return null;
     }
