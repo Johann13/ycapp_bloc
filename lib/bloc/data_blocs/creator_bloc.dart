@@ -54,7 +54,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((change) => change != null)
             .map((change) => fromMap(change.data()))
             .where((v) => v != null)
@@ -68,7 +68,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .where('visible', isEqualTo: true)
         .orderBy('name')
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .map((change) => fromMap(change.data()))
             .where((v) => v != null)
             .toList())
@@ -80,8 +80,8 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .collection('Creator')
         .where('visible', isEqualTo: true)
         .orderBy('name')
-        .getDocuments();
-    return snap.documents
+        .get();
+    return snap.docs
         .where((v) => v != null)
         .where((v) => v.data() != null)
         .map((change) => fromMap(change.data()))
@@ -95,7 +95,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .where('type', isEqualTo: 4)
         .orderBy('name')
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((v) => v != null)
             .where((v) => v.data() != null)
             .map((change) => fromMap(change.data()))
@@ -110,7 +110,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .where('type', isEqualTo: 3)
         .orderBy('name')
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((v) => v != null)
             .where((v) => v.data() != null)
             .map((change) => fromMap(change.data()))
@@ -125,7 +125,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .where('type', isEqualTo: 2)
         .orderBy('name')
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((v) => v != null)
             .where((v) => v.data() != null)
             .map((change) => fromMap(change.data()))
@@ -300,7 +300,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   Future subscribeAll() async {
     print('subscribeAll creator');
     return Future.wait(
-        creatorIdList.map((id) => YMessaging.subscribeToTopic('all')));
+        creatorIdList.map((id) => YMessaging.subscribeToTopic(id)));
   }
 
   Future unsubscribeAll() async {

@@ -142,11 +142,11 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
       String creatorId, String twitchId) async {
     QuerySnapshot query = await FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
-        .getDocuments();
-    List<ScheduleSlot> slots = query.documents
+        .get();
+    List<ScheduleSlot> slots = query.docs
         .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
         .toList();
     return slots;
@@ -156,9 +156,9 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
   Stream<ScheduleSlot> getSlot(String id, String twitchId) {
     return FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
-        .document(id)
+        .doc(id)
         .snapshots()
         .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()));
   }
@@ -167,12 +167,12 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
   Stream<List<ScheduleSlot>> getSlots(String twitchId) {
     return FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .orderBy('day', descending: false)
         .orderBy('slot', descending: false)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((v) => v.data() != null)
             .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
             .toList());
@@ -182,12 +182,12 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
   Future<List<ScheduleSlot>> getSlotsOnce(String twitchId) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .orderBy('day', descending: false)
         .orderBy('slot', descending: false)
-        .getDocuments();
-    return snapshot.documents
+        .get();
+    return snapshot.docs
         .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()))
         .toList();
   }
@@ -195,40 +195,40 @@ class ScheduleFirestoreBloc extends ScheduleBlocBase {
 
 class JJScheduleFirestoreBloc extends JJScheduleBlocBase {
   @override
-  Stream<JJSchedule> getSchedule() {
+  Stream<JJSchedule> getSchedule(String year) {
     return FirebaseFirestore.instance
         .collection('JingleJam')
-        .document('2019')
+        .doc(year)
         .collection('Schedule')
         .snapshots()
         .map((query) {
       List<JJSlot> slots =
-          query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList();
-      JJSchedule schedule = JJSchedule(slots);
+          query.docs.map((doc) => JJSlot.fromMap(year, doc.data())).toList();
+      JJSchedule schedule = JJSchedule(year, slots);
       return schedule;
     });
   }
 
   @override
-  Future<List<JJSlot>> getRelatedSlots(String creatorId) async {
+  Future<List<JJSlot>> getRelatedSlots(String year, String creatorId) async {
     return FirebaseFirestore.instance
         .collection('JingleJam')
-        .document('2019')
+        .doc(year)
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
-        .getDocuments()
+        .get()
         .then((query) =>
-            query.documents.map((doc) => JJSlot.fromMap(doc.data())).toList());
+            query.docs.map((doc) => JJSlot.fromMap(year, doc.data())).toList());
   }
 
   @override
-  Stream<JJSlot> getSlot(String id) {
+  Stream<JJSlot> getSlot(String year, String id) {
     return FirebaseFirestore.instance
         .collection('JingleJam')
-        .document('2019')
+        .doc(year)
         .collection('Schedule')
-        .document(id)
+        .doc(id)
         .snapshots()
-        .map((doc) => JJSlot.fromMap(doc.data()));
+        .map((doc) => JJSlot.fromMap(year, doc.data()));
   }
 }

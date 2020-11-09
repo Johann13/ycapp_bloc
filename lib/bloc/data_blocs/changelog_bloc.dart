@@ -9,7 +9,7 @@ class ChangelogBloc {
         .collection('Changelog')
         .orderBy('id', descending: true)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .map((change) => Changelog.fromMap(change.data()))
             .where((v) => v != null)
             .toList());
@@ -21,7 +21,7 @@ class ChangelogBloc {
         .orderBy('id', descending: true)
         .limit(1)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .map((change) => Changelog.fromMap(change.data()))
             .where((v) => v != null)
             .toList()[0]);

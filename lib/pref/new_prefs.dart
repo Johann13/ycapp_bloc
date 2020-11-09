@@ -7,10 +7,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ycapp_foundation/model/channel/image_quality.dart';
 import 'package:ycapp_foundation/ui/y_colors.dart';
 
-class YcAppPrefs extends SharedPreferencePref {
-  factory YcAppPrefs(SharedPreferences preferences) {
-    return SharedPreferencePref(preferences);
+class PrefProvider extends InheritedWidget {
+  final YcAppPrefs prefs;
+
+  const PrefProvider({
+    Key key,
+    @required Widget child,
+    @required this.prefs,
+  })  : assert(child != null),
+        super(key: key, child: child);
+
+  static YcAppPrefs of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<PrefProvider>().prefs;
   }
+
+  @override
+  bool updateShouldNotify(PrefProvider old) {
+    return false;
+  }
+}
+
+class YcAppPrefs extends SharedPreferencePref {
+  YcAppPrefs(SharedPreferences preferences) : super(preferences);
 }
 
 extension DirectPrefs on YcAppPrefs {

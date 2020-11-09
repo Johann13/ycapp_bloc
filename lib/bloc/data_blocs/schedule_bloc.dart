@@ -9,12 +9,12 @@ class ScheduleBloc {
   Stream<List<ScheduleSlot>> getSlots(String twitchId) {
     return FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .orderBy('day', descending: false)
         .orderBy('slot', descending: false)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .where((v) => v.data() != null)
             .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
             .toList());
@@ -31,12 +31,12 @@ class ScheduleBloc {
   Future<List<ScheduleSlot>> getSlotsOnce(String twitchId) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .orderBy('day', descending: false)
         .orderBy('slot', descending: false)
-        .getDocuments();
-    return snapshot.documents
+        .get();
+    return snapshot.docs
         .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()))
         .toList();
   }
@@ -76,9 +76,9 @@ class ScheduleBloc {
   Stream<ScheduleSlot> getSlot(String id, String twitchId) {
     return FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
-        .document(id)
+        .doc(id)
         .snapshots()
         .map((doc) => ScheduleSlot.fromMap(twitchId, doc.data()));
   }
@@ -87,14 +87,14 @@ class ScheduleBloc {
       String creatorId, String twitchId) async {
     var query = await FirebaseFirestore.instance
         .collection('TwitchChannel')
-        .document(twitchId)
+        .doc(twitchId)
         .collection('Schedule')
         .where('creator', arrayContains: creatorId)
-        .getDocuments();
+        .get();
 
-    //print('docs ${query.documents.length}');
+    //print('docs ${query.docs.length}');
 
-    List<ScheduleSlot> slots = query.documents
+    List<ScheduleSlot> slots = query.docs
         .map((change) => ScheduleSlot.fromMap(twitchId, change.data()))
         .toList();
     //print('slots ${slots.length}');
@@ -106,12 +106,12 @@ class ScheduleBloc {
     return CombineLatestStream.list(twitchIds.map((id) {
       return FirebaseFirestore.instance
           .collection('TwitchChannel')
-          .document(id)
+          .doc(id)
           .collection('Schedule')
           .where('day', isEqualTo: day)
           .snapshots()
           .map((query) {
-        return query.documents.map((doc) {
+        return query.docs.map((doc) {
           return ScheduleSlot.fromMap(id, doc.data());
         }).toList();
       });

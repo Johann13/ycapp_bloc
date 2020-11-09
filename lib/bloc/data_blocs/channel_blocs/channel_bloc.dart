@@ -456,7 +456,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
       .collection(collectionPath())
       .where('visible', isEqualTo: true)
       .snapshots()
-      .map((query) => query.documents.map((doc) => fromMap(doc.data())).toList())
+      .map((query) => query.docs.map((doc) => fromMap(doc.data())).toList())
       .asBroadcastStream();
 
   Stream<T> getChannel(String channelId) => getById(channelId);

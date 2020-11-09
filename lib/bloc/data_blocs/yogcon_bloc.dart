@@ -8,23 +8,23 @@ class YogconBloc {
   Stream<List<Signing>> getSignings() {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('signings')
+        .doc('signings')
         .collection('signings')
         .snapshots()
         .map((query) =>
-            query.documents.map((doc) => Signing.fromMap(doc.data())).toList())
+            query.docs.map((doc) => Signing.fromMap(doc.data())).toList())
         .asBroadcastStream();
   }
 
   Stream<SigningDay> getSigningDay(int day) {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('signings')
+        .doc('signings')
         .collection('signings')
         .where('day', isEqualTo: day)
         .snapshots()
         .map((query) =>
-            query.documents.map((doc) => Signing.fromMap(doc.data())).toList())
+            query.docs.map((doc) => Signing.fromMap(doc.data())).toList())
         .map((list) => SigningDay(list))
         .asBroadcastStream();
   }
@@ -32,20 +32,20 @@ class YogconBloc {
   Stream<List<YCSlot>> getSlots() {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('schedule')
+        .doc('schedule')
         .collection('schedule')
         .snapshots()
         .map((query) =>
-            query.documents.map((doc) => YCSlot.fromMap(doc.data())).toList())
+            query.docs.map((doc) => YCSlot.fromMap(doc.data())).toList())
         .asBroadcastStream();
   }
 
   Stream<YCSlot> getSlot(String id) {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('schedule')
+        .doc('schedule')
         .collection('schedule')
-        .document(id)
+        .doc(id)
         .snapshots()
         .map((doc) => YCSlot.fromMap(doc.data()))
         .asBroadcastStream();
@@ -54,24 +54,24 @@ class YogconBloc {
   Stream<List<YCSlot>> getSlotsByCreator(String creatorId) {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('schedule')
+        .doc('schedule')
         .collection('schedule')
         .where('creator', arrayContains: creatorId)
         .snapshots()
         .map((query) =>
-            query.documents.map((doc) => YCSlot.fromMap(doc.data())).toList())
+            query.docs.map((doc) => YCSlot.fromMap(doc.data())).toList())
         .asBroadcastStream();
   }
 
   Stream<YCDay> getScheduleDay(int day) {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('schedule')
+        .doc('schedule')
         .collection('schedule')
         .where('day', isEqualTo: day)
         .snapshots()
         .map((query) =>
-            query.documents.map((doc) => YCSlot.fromMap(doc.data())).toList())
+            query.docs.map((doc) => YCSlot.fromMap(doc.data())).toList())
         .map((list) => YCDay(list))
         .asBroadcastStream();
   }
@@ -83,9 +83,9 @@ class YogconBloc {
   Stream<Signing> getSigning(String id) {
     return FirebaseFirestore.instance
         .collection('Yogcon')
-        .document('signings')
+        .doc('signings')
         .collection('signings')
-        .document(id)
+        .doc(id)
         .snapshots()
         .map((v) => Signing.fromMap(v.data()));
   }

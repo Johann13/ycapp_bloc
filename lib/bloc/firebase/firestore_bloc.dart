@@ -7,7 +7,7 @@ abstract class FirestoreBloc<T> extends DataBloc<T> {
   CollectionReference get collection =>
       FirebaseFirestore.instance.collection(collectionPath());
 
-  DocumentReference document(String id) => collection.document(id);
+  DocumentReference document(String id) => collection.doc(id);
 
   @override
   Stream<T> getById(String docId) {
@@ -26,7 +26,7 @@ abstract class FirestoreBloc<T> extends DataBloc<T> {
   Stream<List<T>> getAll() {
     return collection
         .snapshots()
-        .map((query) => query.documents
+        .map((query) => query.docs
             .where((doc) => doc != null)
             .map((doc) => fromMap(doc.data()))
             .where((v) => v != null)

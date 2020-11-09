@@ -9,7 +9,7 @@ class NewsBloc {
         .collection('News')
         .orderBy('createdAt', descending: true)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.docs
             .map((doc) => News.fromMap(doc.data()))
             .toList());
   }
@@ -17,7 +17,7 @@ class NewsBloc {
   Stream<News> getNews(String id) {
     return FirebaseFirestore.instance
         .collection('News')
-        .document(id)
+        .doc(id)
         .snapshots()
         .map((doc) => News.fromMap(doc.data()));
   }

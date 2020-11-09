@@ -66,7 +66,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .startAfter([videoId])
         .limit(limit)
         .orderBy('publishedAt', descending: true)
-        .getDocuments();
+        .get();
     return query.documentChanges
         .map((doc) => Video.fromMap(doc.document.data()))
         .toList();
@@ -75,7 +75,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
   Future<Video> getVideo(String videoId) async {
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('YoutubeVideo')
-        .document(videoId)
+        .doc(videoId)
         .get();
     return Video.fromMap(doc.data());
   }
@@ -83,7 +83,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
   Stream<Video> getVideoStream(String videoId) {
     return FirebaseFirestore.instance
         .collection('YoutubeVideo')
-        .document(videoId)
+        .doc(videoId)
         .snapshots()
         .map((doc) => Video.fromMap(doc.data()));
   }
