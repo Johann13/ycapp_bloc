@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_preferences/prefs/shared_preference_prefs_impl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ycapp_foundation/dates/y_date.dart';
 import 'package:ycapp_foundation/model/channel/image_quality.dart';
 import 'package:ycapp_foundation/ui/y_colors.dart';
 
@@ -35,18 +36,18 @@ extension DirectPrefs on YcAppPrefs {
   MaterialColor get primaryColorOnce {
     switch (themeNameOnce) {
       case 'orange':
-        return YColors.accentColorPallet;
+        return YColors.accentColor;
       default:
-        return YColors.primaryColorPallet;
+        return YColors.primaryColor;
     }
   }
 
   MaterialColor get accentColorOnce {
     switch (themeNameOnce) {
       case 'orange':
-        return YColors.primaryColorPallet;
+        return YColors.primaryColor;
       default:
-        return YColors.accentColorPallet;
+        return YColors.accentColor;
     }
   }
 
@@ -54,21 +55,38 @@ extension DirectPrefs on YcAppPrefs {
     String t = themeNameOnce;
     bool dark = darkModeOnce;
     bool amoled = amoledModeOnce;
+    if (YDates.useJJTheme) {
+      return ThemeData(
+        brightness: (!dark) ? Brightness.light : Brightness.dark,
+        scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+        primarySwatch: YColors.jingleJamPrimary,
+        accentColor: YColors.jingleJamAccent,
+        cardColor: dark && amoled ? Colors.black : null,
+      );
+    }
     switch (t) {
       case 'orange':
         return ThemeData(
           brightness: (!dark) ? Brightness.light : Brightness.dark,
           scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
-          accentColor: YColors.primaryColorPallet,
-          primarySwatch: YColors.accentColorPallet,
+          accentColor: YColors.primaryColor,
+          primarySwatch: YColors.accentColor,
+          cardColor: dark && amoled ? Colors.black : null,
+        );
+      case 'jj':
+        return ThemeData(
+          brightness: (!dark) ? Brightness.light : Brightness.dark,
+          scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+          primarySwatch: YColors.jingleJamPrimary,
+          accentColor: YColors.jingleJamAccent,
           cardColor: dark && amoled ? Colors.black : null,
         );
       default:
         return ThemeData(
           brightness: (!dark) ? Brightness.light : Brightness.dark,
           scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
-          primarySwatch: YColors.primaryColorPallet,
-          accentColor: YColors.accentColorPallet,
+          primarySwatch: YColors.primaryColor,
+          accentColor: YColors.accentColor,
           cardColor: dark && amoled ? Colors.black : null,
         );
     }
@@ -190,9 +208,9 @@ extension StreamPrefs on YcAppPrefs {
     return themeName.map((event) {
       switch (event) {
         case 'orange':
-          return YColors.accentColorPallet;
+          return YColors.accentColor;
         default:
-          return YColors.primaryColorPallet;
+          return YColors.primaryColor;
       }
     });
   }
@@ -201,9 +219,9 @@ extension StreamPrefs on YcAppPrefs {
     return themeName.map((event) {
       switch (event) {
         case 'orange':
-          return YColors.primaryColorPallet;
+          return YColors.primaryColor;
         default:
-          return YColors.accentColorPallet;
+          return YColors.accentColor;
       }
     });
   }
@@ -217,21 +235,38 @@ extension StreamPrefs on YcAppPrefs {
       String t = list[0];
       bool dark = list[1];
       bool amoled = list[2];
+      if (YDates.useJJTheme) {
+        return ThemeData(
+          brightness: (!dark) ? Brightness.light : Brightness.dark,
+          scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+          primarySwatch: YColors.jingleJamPrimary,
+          accentColor: YColors.jingleJamAccent,
+          cardColor: dark && amoled ? Colors.black : null,
+        );
+      }
       switch (t) {
         case 'orange':
           return ThemeData(
             brightness: (!dark) ? Brightness.light : Brightness.dark,
             scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
-            accentColor: YColors.primaryColorPallet,
-            primarySwatch: YColors.accentColorPallet,
+            accentColor: YColors.primaryColor,
+            primarySwatch: YColors.accentColor,
+            cardColor: dark && amoled ? Colors.black : null,
+          );
+        case 'jj':
+          return ThemeData(
+            brightness: (!dark) ? Brightness.light : Brightness.dark,
+            scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+            primarySwatch: YColors.jingleJamPrimary,
+            accentColor: YColors.jingleJamAccent,
             cardColor: dark && amoled ? Colors.black : null,
           );
         default:
           return ThemeData(
             brightness: (!dark) ? Brightness.light : Brightness.dark,
             scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
-            primarySwatch: YColors.primaryColorPallet,
-            accentColor: YColors.accentColorPallet,
+            primarySwatch: YColors.primaryColor,
+            accentColor: YColors.accentColor,
             cardColor: dark && amoled ? Colors.black : null,
           );
       }
