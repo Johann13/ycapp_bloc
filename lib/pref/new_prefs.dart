@@ -15,11 +15,14 @@ class PrefProvider extends InheritedWidget {
     Key key,
     @required Widget child,
     @required this.prefs,
-  })  : assert(child != null),
+  })
+      : assert(child != null),
         super(key: key, child: child);
 
   static YcAppPrefs of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<PrefProvider>().prefs;
+    return context
+        .dependOnInheritedWidgetOfExactType<PrefProvider>()
+        .prefs;
   }
 
   @override
@@ -56,6 +59,15 @@ extension DirectPrefs on YcAppPrefs {
     bool dark = darkModeOnce;
     bool amoled = amoledModeOnce;
     if (YDates.useJJTheme) {
+      if (dark) {
+        return ThemeData(
+          brightness: (!dark) ? Brightness.light : Brightness.dark,
+          scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+          primarySwatch: YColors.jingleJamAccent,
+          accentColor: YColors.jingleJamPrimary,
+          cardColor: dark && amoled ? Colors.black : null,
+        );
+      }
       return ThemeData(
         brightness: (!dark) ? Brightness.light : Brightness.dark,
         scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
@@ -228,7 +240,7 @@ extension StreamPrefs on YcAppPrefs {
 
   Stream<ThemeData> get theme {
     return CombineLatestStream.list([
-      theme,
+      themeName,
       darkMode,
       amoledMode,
     ]).map((list) {
@@ -236,6 +248,15 @@ extension StreamPrefs on YcAppPrefs {
       bool dark = list[1];
       bool amoled = list[2];
       if (YDates.useJJTheme) {
+        if (dark) {
+          return ThemeData(
+            brightness: (!dark) ? Brightness.light : Brightness.dark,
+            scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+            primarySwatch: YColors.jingleJamAccent,
+            accentColor: YColors.jingleJamPrimary,
+            cardColor: dark && amoled ? Colors.black : null,
+          );
+        }
         return ThemeData(
           brightness: (!dark) ? Brightness.light : Brightness.dark,
           scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
@@ -254,8 +275,17 @@ extension StreamPrefs on YcAppPrefs {
             cardColor: dark && amoled ? Colors.black : null,
           );
         case 'jj':
+          if (dark) {
+            return ThemeData(
+              brightness: Brightness.dark,
+              scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
+              primarySwatch: YColors.jingleJamAccent,
+              accentColor: YColors.jingleJamPrimary,
+              cardColor: dark && amoled ? Colors.black : null,
+            );
+          }
           return ThemeData(
-            brightness: (!dark) ? Brightness.light : Brightness.dark,
+            brightness: Brightness.light,
             scaffoldBackgroundColor: (dark && amoled) ? Colors.black : null,
             primarySwatch: YColors.jingleJamPrimary,
             accentColor: YColors.jingleJamAccent,
