@@ -18,7 +18,7 @@ dev_dependencies:
   rxdart: ^0.24.0
   firebase_analytics: ^6.2.0
   cloud_firestore: ^0.14.3
-  firebase_remote_config: ^0.3.0+3
+  firebase_remote_config: ^0.3.1
   firestore_ui: ^1.11.0
 
   ycapp_messaging:
