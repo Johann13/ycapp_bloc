@@ -255,6 +255,10 @@ extension StreamPrefs on YcAppPrefs {
             primarySwatch: YColors.jingleJamAccent,
             accentColor: YColors.jingleJamPrimary,
             cardColor: dark && amoled ? Colors.black : null,
+            appBarTheme: AppBarTheme(
+              brightness: Brightness.light,
+              color: YColors.jingleJamPrimary,
+            ),
           );
         }
         return ThemeData(
@@ -282,6 +286,10 @@ extension StreamPrefs on YcAppPrefs {
               primarySwatch: YColors.jingleJamAccent,
               accentColor: YColors.jingleJamPrimary,
               cardColor: dark && amoled ? Colors.black : null,
+              appBarTheme: AppBarTheme(
+                brightness: Brightness.light,
+                color: YColors.jingleJamPrimary,
+              ),
             );
           }
           return ThemeData(
