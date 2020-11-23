@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
-import 'package:ycapp_messaging/ycapp_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'data_blocs/changelog_bloc.dart';
 import 'data_blocs/channel_blocs/podcast_bloc.dart';
@@ -89,7 +89,10 @@ class YBloc {
     }
 
     int lastSub = await Prefs.getInt('lastSub',
-        DateTime.now().subtract(Duration(days: 4)).millisecondsSinceEpoch);
+        DateTime
+            .now()
+            .subtract(Duration(days: 4))
+            .millisecondsSinceEpoch);
 
     DateTime now = DateTime.now();
     DateTime lastSubDate = DateTime.fromMillisecondsSinceEpoch(lastSub);
@@ -98,7 +101,7 @@ class YBloc {
 
     print(duration);
     print(duration.inHours);
-    if (duration.inHours >= 48) {
+    if (duration.inHours >= 24 * 14) {
       print('resub topics');
       await Prefs.setInt('lastSub', now.millisecondsSinceEpoch);
       await time('forceSub()', logTime, () async {
@@ -146,7 +149,7 @@ class YBloc {
 
   Future<void> forceSub() async {
     print('subscribe all topics');
-    await YMessaging.subscribeToTopic('all');
+    await FirebaseMessaging.instance.subscribeToTopic('all');
     print('FirebaseChannel.subscribeToTopic');
     await Future.wait([
       time('creator.subscribeAll', logTime, () async {
@@ -163,7 +166,7 @@ class YBloc {
 
   Future<void> forceUnsub() async {
     print('unsubscribe all topics');
-    await YMessaging.unsubscribeFromTopic('all');
+    await FirebaseMessaging.instance.subscribeToTopic('all');
     Future.wait([
       creator.unsubscribeAll(),
       twitch.unsubscribeAll(),
@@ -172,7 +175,7 @@ class YBloc {
   }
 
   Future<void> unsubscribeFromTopic(String id) async {
-    await YMessaging.unsubscribeFromTopic(id);
+    await FirebaseMessaging.instance.subscribeToTopic(id);
   }
 
   Future<void> resetSubs() async {

@@ -2,17 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
+import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/bloc/firebase/firestore_bloc.dart';
 import 'package:ycapp_foundation/model/creator/creator.dart';
-import 'package:ycapp_messaging/ycapp_messaging.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
-import 'package:ycapp_analytics/ycapp_analytics.dart';
 
 typedef void AddListener(String id);
 typedef void RemoveListener(String id);
-
 
 class CreatorBloc extends FirestoreBloc<Creator> {
   String _creatorSubscriptionsPrefName = 'creatorSubscriptions';
@@ -25,10 +24,13 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   final _collaborationSubject = BehaviorSubject<List<String>>();
   List<String> _collaborationList = [];
 
-  Stream<List<String>> get collaboration => _collaborationSubject.stream.asBroadcastStream();
+  Stream<List<String>> get collaboration =>
+      _collaborationSubject.stream.asBroadcastStream();
   final _collaborationInboxSubject = BehaviorSubject<List<String>>();
   List<String> _collaborationInboxList = [];
-  Stream<List<String>> get creatorIdsStream => _creatorIdsSubject.stream.asBroadcastStream();
+
+  Stream<List<String>> get creatorIdsStream =>
+      _creatorIdsSubject.stream.asBroadcastStream();
 
   List<String> get creatorIdList => _creatorIdList;
 
@@ -46,7 +48,6 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     await _refreshList(setPref: false);
     print('creator initList done ${DateTime.now().difference(now)}');
   }
-
 
   Stream<List<Creator>> getAllCreator() {
     return FirebaseFirestore.instance
@@ -192,10 +193,10 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   Future<void> addCreator(String creatorId) async {
     if (!_creatorIdList.contains(creatorId)) {
       _creatorIdList.add(creatorId);
-      await _refreshList();
-      await YMessaging.subscribeToTopic(creatorId);
+      await FirebaseMessaging.instance.subscribeToTopic(creatorId);
       await YAnalytics.log('subscribeCreator',
           parameters: {'creator_id': creatorId});
+      await _refreshList();
     }
   }
 
@@ -208,9 +209,8 @@ class CreatorBloc extends FirestoreBloc<Creator> {
 
     await _refreshList();
 
-    await Future.wait(creatorIds.map((id) {
-      return YMessaging.subscribeToTopic(id);
-    }));
+    await Future.wait(creatorIds
+        .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
 
     await YAnalytics.log('subscribeCreatorAll');
   }
@@ -218,10 +218,10 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   Future<void> removeCreator(String creatorId) async {
     if (_creatorIdList.contains(creatorId)) {
       _creatorIdList.remove(creatorId);
-      await _refreshList();
-      await YMessaging.unsubscribeFromTopic(creatorId);
+      await FirebaseMessaging.instance.subscribeToTopic(creatorId);
       await YAnalytics.log('unsubscribeCreator',
           parameters: {'creator_id': creatorId});
+      await _refreshList();
     }
   }
 
@@ -252,18 +252,18 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   Future<void> addCollaborationInbox(String creatorId) async {
     if (!_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.add(creatorId);
-      await _refreshList();
       await YAnalytics.log('addCollabInbox',
           parameters: {'creator_id': creatorId});
+      await _refreshList();
     }
   }
 
   Future<void> removeCollaborationInbox(String creatorId) async {
     if (_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.remove(creatorId);
-      await _refreshList();
       await YAnalytics.log('removeCollabInbox',
           parameters: {'creator_id': creatorId});
+      await _refreshList();
     }
   }
 
@@ -299,14 +299,14 @@ class CreatorBloc extends FirestoreBloc<Creator> {
 
   Future subscribeAll() async {
     print('subscribeAll creator');
-    return Future.wait(
-        creatorIdList.map((id) => YMessaging.subscribeToTopic(id)));
+    return Future.wait(creatorIdList
+        .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
   }
 
   Future unsubscribeAll() async {
     print('unsubscribeAll creator');
-    return Future.wait(
-        creatorIdList.map((id) => YMessaging.unsubscribeFromTopic(id)));
+    return Future.wait(creatorIdList
+        .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
   }
 
   void dispose() {
