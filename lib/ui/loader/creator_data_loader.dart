@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firestore_ui/firestore_ui.dart';
+//import 'package:firestore_ui/firestore_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:ycapp_bloc/bloc/repo_provider.dart';
 import 'package:ycapp_bloc/ui/loader/pref_data_loader.dart';
@@ -191,6 +191,7 @@ typedef Widget CreatorBuilder(
   int index,
 );
 
+/*
 class AnimatedCreatorListStream extends StatelessWidget {
   final CreatorBuilder builder;
 
@@ -221,3 +222,4 @@ class AnimatedCreatorListStream extends StatelessWidget {
     );
   }
 }
+*/
