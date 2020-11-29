@@ -85,20 +85,17 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     DateTime now = DateTime.now();
     this._subscriptionsList = await _getSubscriptionPrefs();
     _print(
-        '$_subscriptionsPrefName _subscriptionsList ${DateTime.now().difference(
-            now)}');
+        '$_subscriptionsPrefName _subscriptionsList ${DateTime.now().difference(now)}');
     this._notificationsList = await _getNotificationsPrefs();
     _print(
-        '$_subscriptionsPrefName _notificationsList ${DateTime.now().difference(
-            now)}');
+        '$_subscriptionsPrefName _notificationsList ${DateTime.now().difference(now)}');
     this._inboxList = await _getInboxPrefs();
     _print(
         '$_subscriptionsPrefName _inboxList ${DateTime.now().difference(now)}');
 
     await _refreshList(setPrefs: false);
     _print(
-        '$_subscriptionsPrefName initList done ${DateTime.now().difference(
-            now)}');
+        '$_subscriptionsPrefName initList done ${DateTime.now().difference(now)}');
   }
 
   //region getter and setter
@@ -287,7 +284,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
     if (!_subscriptionsList.contains(id)) {
       _subscriptionsList.add(id);
       await _sub(id);
-      await YAnalytics.log('subscribe', parameters: {'id': id});
+      await YAnalytics.log('subscribe',
+          parameters: <String, dynamic>{'id': id});
       _print('_subscribe $id');
     } else {
       _print('not added sub');
@@ -317,7 +315,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
       _subscriptionsList.remove(id);
       await _unsub(id);
       _print('_unsubscribe: $id');
-      await YAnalytics.log('unsubscribe', parameters: {'id': id});
+      await YAnalytics.log('unsubscribe',
+          parameters: <String, dynamic>{'id': id});
       return true;
     } else {
       return false;
@@ -343,7 +342,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   Future<void> _subscribeToNotification(String id) async {
     if (!_notificationsList.contains(id)) {
       _notificationsList.add(id);
-      await YAnalytics.log('subscribeNoti', parameters: {'id': id});
+      await YAnalytics.log('subscribeNoti',
+          parameters: <String, dynamic>{'id': id});
       _print('_subscribeToNotification $id');
     }
   }
@@ -362,7 +362,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   Future<void> _unsubscribeFromNotification(String id) async {
     if (_notificationsList.contains(id)) {
       _notificationsList.remove(id);
-      await YAnalytics.log('unsubscribeNoti', parameters: {'id': id});
+      await YAnalytics.log('unsubscribeNoti',
+          parameters: <String, dynamic>{'id': id});
       _print('_unsubscribeFromNotification $id');
     }
   }
@@ -381,7 +382,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   Future<void> _subscribeToInbox(String id) async {
     if (!_inboxList.contains(id)) {
       _inboxList.add(id);
-      await YAnalytics.log('subscribeInbox', parameters: {'id': id});
+      await YAnalytics.log('subscribeInbox',
+          parameters: <String, dynamic>{'id': id});
       _print('_subscribeToInbox $id');
     }
   }
@@ -405,7 +407,8 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
   Future<void> _unsubscribeFromInbox(String id) async {
     if (_inboxList.contains(id)) {
       _inboxList.remove(id);
-      await YAnalytics.log('unsubscribeInbox', parameters: {'id': id});
+      await YAnalytics.log('unsubscribeInbox',
+          parameters: <String, dynamic>{'id': id});
       _print('_unsubscribeFromInbox $id');
     }
   }
@@ -426,7 +429,7 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
         .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
   }
 
-  Future unsubscribeAll() async {
+  Future<List<void>> unsubscribeAll() async {
     return Future.wait(subscriptionsList
         .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
   }
@@ -465,13 +468,12 @@ abstract class ChannelBloc<T extends Channel> extends FirestoreBloc<T> {
 
   //region data
 
-  Stream<List<T>> getAllChannel() =>
-      FirebaseFirestore.instance
-          .collection(collectionPath())
-          .where('visible', isEqualTo: true)
-          .snapshots()
-          .map((query) => query.docs.map((doc) => fromMap(doc.data())).toList())
-          .asBroadcastStream();
+  Stream<List<T>> getAllChannel() => FirebaseFirestore.instance
+      .collection(collectionPath())
+      .where('visible', isEqualTo: true)
+      .snapshots()
+      .map((query) => query.docs.map((doc) => fromMap(doc.data())).toList())
+      .asBroadcastStream();
 
   Stream<T> getChannel(String channelId) => getById(channelId);
 

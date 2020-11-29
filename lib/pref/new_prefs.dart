@@ -15,14 +15,11 @@ class PrefProvider extends InheritedWidget {
     Key key,
     @required Widget child,
     @required this.prefs,
-  })
-      : assert(child != null),
+  })  : assert(child != null),
         super(key: key, child: child);
 
   static YcAppPrefs of(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<PrefProvider>()
-        .prefs;
+    return context.dependOnInheritedWidgetOfExactType<PrefProvider>().prefs;
   }
 
   @override
@@ -244,9 +241,9 @@ extension StreamPrefs on YcAppPrefs {
       darkMode,
       amoledMode,
     ]).map((list) {
-      String t = list[0];
-      bool dark = list[1];
-      bool amoled = list[2];
+      String t = list[0] as String;
+      bool dark = list[1] as bool;
+      bool amoled = list[2] as bool;
       if (YDates.useJJTheme) {
         if (dark) {
           return ThemeData(

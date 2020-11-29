@@ -50,7 +50,7 @@ abstract class ScheduleBlocBase {
         .map((list) => CombinedSchedule.withList(list));
   }
 
-  ScheduleSlot toSlot(String twitchId, Map map) {
+  ScheduleSlot toSlot(String twitchId, Map<String,dynamic> map) {
     return ScheduleSlot.fromMap(twitchId, map);
   }
 }

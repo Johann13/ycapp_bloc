@@ -25,8 +25,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data()))
+        .map((query) => query.docs
+            .map((doc) => Video.fromMap(doc.data()))
             .toList());
   }
 
@@ -37,8 +37,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .where('creator', arrayContains: creatorId)
         .orderBy('publisedAt', descending: true)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data()))
+        .map((query) => query.docs
+            .map((doc) => Video.fromMap(doc.data()))
             .toList());
   }
 
@@ -63,12 +63,12 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .orderBy('videoId', descending: true)
-        .startAfter([videoId])
+        .startAfter(<String>[videoId])
         .limit(limit)
         .orderBy('publishedAt', descending: true)
         .get();
-    return query.documentChanges
-        .map((doc) => Video.fromMap(doc.document.data()))
+    return query.docs
+        .map((doc) => Video.fromMap(doc.data()))
         .toList();
   }
 
@@ -114,7 +114,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
   String collectionPath() => 'YoutubeChannel';
 
   @override
-  YoutubeChannel fromMap(Map map) => YoutubeChannel.fromMap(map);
+  YoutubeChannel fromMap(Map<String, dynamic> map) =>
+      YoutubeChannel.fromMap(map);
 
   @override
   List<YoutubeChannel> sortByIds(List<YoutubeChannel> list) {
@@ -125,7 +126,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
   Future<List<YoutubeChannel>> getAllChannelHttp() async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/youtube');
-    List list = json.decode(resp.body);
+    List<Map<String, dynamic>> list =
+        json.decode(resp.body) as List<Map<String, dynamic>>;
     return list.map((j) => YoutubeChannel.fromMap(j)).toList();
   }
 
@@ -139,13 +141,14 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/youtube'
         '?ids=$s');
-    List list = json.decode(resp.body);
+    List<Map<String, dynamic>> list =
+        json.decode(resp.body) as List<Map<String, dynamic>>;
     return list.map((j) => YoutubeChannel.fromMap(j)).toList();
   }
 
   Future<YoutubeChannel> getChannelHttp(String id) async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/youtube/$id');
-    return YoutubeChannel.fromMap(json.decode(resp.body));
+    return YoutubeChannel.fromMap(json.decode(resp.body)as Map<String, dynamic>);
   }
 }

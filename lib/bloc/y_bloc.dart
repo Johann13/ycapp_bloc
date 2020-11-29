@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ycapp_analytics/ycapp_analytics.dart';
 import 'package:ycapp_bloc/misc/function_timer.dart';
 import 'package:ycapp_foundation/prefs/prefs.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'data_blocs/changelog_bloc.dart';
 import 'data_blocs/channel_blocs/podcast_bloc.dart';
@@ -89,10 +89,7 @@ class YBloc {
     }
 
     int lastSub = await Prefs.getInt('lastSub',
-        DateTime
-            .now()
-            .subtract(Duration(days: 4))
-            .millisecondsSinceEpoch);
+        DateTime.now().subtract(Duration(days: 4)).millisecondsSinceEpoch);
 
     DateTime now = DateTime.now();
     DateTime lastSubDate = DateTime.fromMillisecondsSinceEpoch(lastSub);
@@ -167,7 +164,7 @@ class YBloc {
   Future<void> forceUnsub() async {
     print('unsubscribe all topics');
     await FirebaseMessaging.instance.subscribeToTopic('all');
-    Future.wait([
+    await Future.wait([
       creator.unsubscribeAll(),
       twitch.unsubscribeAll(),
       youtube.unsubscribeAll(),

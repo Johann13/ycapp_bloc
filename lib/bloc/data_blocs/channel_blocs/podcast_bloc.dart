@@ -100,7 +100,7 @@ class PodcastBloc extends ChannelBloc<Podcast> {
   }
 
   @override
-  Podcast fromMap(Map map) {
+  Podcast fromMap(Map<String,dynamic> map) {
     return Podcast.fromMap(map);
   }
 

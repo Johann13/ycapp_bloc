@@ -17,7 +17,7 @@ class CreatorFirestoreBloc extends FirestoreBloc<Creator> {
   String collectionPath() => 'Creator';
 
   @override
-  Creator fromMap(Map map) => Creator.fromMap(map);
+  Creator fromMap(Map<String,dynamic> map) => Creator.fromMap(map);
 }
 
 class YoutubeFirestoreBloc extends FirestoreBloc<YoutubeChannel> {
@@ -25,7 +25,7 @@ class YoutubeFirestoreBloc extends FirestoreBloc<YoutubeChannel> {
   String collectionPath() => 'YoutubeChannel';
 
   @override
-  YoutubeChannel fromMap(Map map) => YoutubeChannel.fromMap(map);
+  YoutubeChannel fromMap(Map<String,dynamic> map) => YoutubeChannel.fromMap(map);
 }
 
 class TwitchFirestoreBloc extends FirestoreBloc<TwitchChannel> {
@@ -33,7 +33,7 @@ class TwitchFirestoreBloc extends FirestoreBloc<TwitchChannel> {
   String collectionPath() => 'TwitchChannel';
 
   @override
-  TwitchChannel fromMap(Map map) => TwitchChannel.fromMap(map);
+  TwitchChannel fromMap(Map<String,dynamic> map) => TwitchChannel.fromMap(map);
 }
 
 class PodcastFirestoreBloc extends FirestoreBloc<Podcast> {
@@ -115,7 +115,7 @@ class PodcastFirestoreBloc extends FirestoreBloc<Podcast> {
   }
 
   @override
-  Podcast fromMap(Map map) {
+  Podcast fromMap(Map<String,dynamic> map) {
     return Podcast.fromMap(map);
   }
 }
@@ -125,7 +125,7 @@ class NewsFirestoreBloc extends FirestoreBloc<News> {
   String collectionPath() => 'News';
 
   @override
-  News fromMap(Map map) => News.fromMap(map);
+  News fromMap(Map<String,dynamic> map) => News.fromMap(map);
 }
 
 class PollFirestoreBloc extends FirestoreBloc<Poll> {
@@ -133,7 +133,7 @@ class PollFirestoreBloc extends FirestoreBloc<Poll> {
   String collectionPath() => 'Poll';
 
   @override
-  Poll fromMap(Map map) => Poll.fromMap(map);
+  Poll fromMap(Map<String,dynamic> map) => Poll.fromMap(map);
 }
 
 class ScheduleFirestoreBloc extends ScheduleBlocBase {

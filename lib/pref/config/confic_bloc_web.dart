@@ -27,7 +27,7 @@ class ConfigBlocWeb extends ConfigBloc {
   @override
   String getString(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? '';
+      return defaults[key] as String ?? '';
     }
     return remoteConfig.getString(key);
   }
@@ -35,15 +35,15 @@ class ConfigBlocWeb extends ConfigBloc {
   @override
   int getInt(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? 0;
+      return defaults[key] as int ?? 0;
     }
-    return remoteConfig.getNumber(key);
+    return remoteConfig.getNumber(key).toInt();
   }
 
   @override
   bool getBool(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? true;
+      return defaults[key] as bool ?? true;
     }
     return remoteConfig.getBoolean(key);
   }

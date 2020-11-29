@@ -195,7 +195,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
       _creatorIdList.add(creatorId);
       await FirebaseMessaging.instance.subscribeToTopic(creatorId);
       await YAnalytics.log('subscribeCreator',
-          parameters: {'creator_id': creatorId});
+          parameters: <String, dynamic>{'creator_id': creatorId});
       await _refreshList();
     }
   }
@@ -220,7 +220,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
       _creatorIdList.remove(creatorId);
       await FirebaseMessaging.instance.subscribeToTopic(creatorId);
       await YAnalytics.log('unsubscribeCreator',
-          parameters: {'creator_id': creatorId});
+          parameters: <String, dynamic>{'creator_id': creatorId});
       await _refreshList();
     }
   }
@@ -236,7 +236,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     if (_collaborationList.contains(creatorId)) {
       _collaborationList.remove(creatorId);
       await YAnalytics.log('removeCollab',
-          parameters: {'creator_id': creatorId});
+          parameters: <String, dynamic>{'creator_id': creatorId});
     }
   }
 
@@ -253,7 +253,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     if (!_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.add(creatorId);
       await YAnalytics.log('addCollabInbox',
-          parameters: {'creator_id': creatorId});
+          parameters: <String, dynamic>{'creator_id': creatorId});
       await _refreshList();
     }
   }
@@ -262,7 +262,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     if (_collaborationInboxList.contains(creatorId)) {
       _collaborationInboxList.remove(creatorId);
       await YAnalytics.log('removeCollabInbox',
-          parameters: {'creator_id': creatorId});
+          parameters: <String, dynamic>{'creator_id': creatorId});
       await _refreshList();
     }
   }
@@ -303,7 +303,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
   }
 
-  Future unsubscribeAll() async {
+  Future<List<void>> unsubscribeAll() async {
     print('unsubscribeAll creator');
     return Future.wait(creatorIdList
         .map((id) => FirebaseMessaging.instance.subscribeToTopic(id)));
@@ -321,7 +321,7 @@ class CreatorBloc extends FirestoreBloc<Creator> {
   String collectionPath() => 'Creator';
 
   @override
-  Creator fromMap(Map map) => Creator.fromMap(map);
+  Creator fromMap(Map<String, dynamic> map) => Creator.fromMap(map);
 
   Future<List<Creator>> getCreatorHttp({
     String after,
@@ -342,7 +342,8 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     if (resp.body == 'Channel not found') {
       return [];
     }
-    List list = json.decode(resp.body);
+    List<Map<String, dynamic>> list =
+        json.decode(resp.body) as List<Map<String, dynamic>>;
     return list.map((j) => Creator.fromMap(j)).toList();
   }
 
@@ -357,7 +358,8 @@ class CreatorBloc extends FirestoreBloc<Creator> {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/creator'
         '?ids=$s');
-    List list = json.decode(resp.body);
+    List<Map<String, dynamic>> list =
+        json.decode(resp.body) as List<Map<String, dynamic>>;
     return list.map((j) => Creator.fromMap(j)).toList();
   }
 
@@ -366,6 +368,6 @@ class CreatorBloc extends FirestoreBloc<Creator> {
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/creator/$id';
     print('getCreatorHttp $url');
     var resp = await http.get(url);
-    return Creator.fromMap(json.decode(resp.body));
+    return Creator.fromMap(json.decode(resp.body) as Map<String, dynamic>);
   }
 }

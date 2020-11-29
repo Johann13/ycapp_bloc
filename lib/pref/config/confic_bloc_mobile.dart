@@ -37,21 +37,21 @@ class ConfigBlocMobile extends ConfigBloc {
 
   String getString(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? '';
+      return defaults[key] as String ?? '';
     }
     return remoteConfig.getString(key);
   }
 
   int getInt(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? 0;
+      return defaults[key] as int ?? 0;
     }
     return remoteConfig.getInt(key);
   }
 
   bool getBool(String key) {
     if (remoteConfig == null) {
-      return defaults[key] ?? true;
+      return defaults[key] as bool ?? true;
     }
     return remoteConfig.getBool(key);
   }

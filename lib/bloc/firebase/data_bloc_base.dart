@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
 abstract class DataBloc<T> {
-
   String collectionPath();
 
   Stream<T> getById(String docId);
@@ -12,7 +11,7 @@ abstract class DataBloc<T> {
 
   Future<T> getOnceById(String docId);
 
-  T fromMap(Map map);
+  T fromMap(Map<String, dynamic> map);
 
   Stream<List<T>> getByIds(List<String> docIds) {
     if (docIds.isEmpty) {
@@ -28,7 +27,6 @@ abstract class DataBloc<T> {
         .map((l) => l.where((v) => v != null).toList())
         .asBroadcastStream();
   }
-
 
   Future<List<T>> getOnceByIds(List<String> docIds) async {
     if (docIds.isEmpty) {
