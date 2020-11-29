@@ -44,8 +44,11 @@ dev_dependencies:
   connectivity: ^2.0.1
 
   flutter_async_builder: ^0.0.1+1
+
   reactive_preferences:
-    path: ../../reactive_preferences
+    git:
+      url: git://github.com/Johann13/reactive_preferences.git
+
 
 
 # For information on the generic Dart part of this file, see the
