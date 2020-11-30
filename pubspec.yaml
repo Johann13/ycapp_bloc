@@ -22,7 +22,7 @@ dev_dependencies:
   firebase_messaging: ^8.0.0-dev.9
   firebase_analytics: ^6.2.0
   cloud_firestore: ^0.14.3
-  firebase_remote_config: ^0.4.2
+  firebase_remote_config: ^0.3.1
   #firestore_ui: ^1.11.0
 
   #ycapp_messaging:
