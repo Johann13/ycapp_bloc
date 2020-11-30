@@ -25,9 +25,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .snapshots()
-        .map((query) => query.docs
-            .map((doc) => Video.fromMap(doc.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => Video.fromMap(doc.data())).toList());
   }
 
   Stream<List<Video>> getLatestMainChannelVideo(String creatorId) {
@@ -37,9 +36,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .where('creator', arrayContains: creatorId)
         .orderBy('publisedAt', descending: true)
         .snapshots()
-        .map((query) => query.docs
-            .map((doc) => Video.fromMap(doc.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => Video.fromMap(doc.data())).toList());
   }
 
   Stream<List<Video>> getAllVideos(List<String> youtubeIds) {
@@ -67,9 +65,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .limit(limit)
         .orderBy('publishedAt', descending: true)
         .get();
-    return query.docs
-        .map((doc) => Video.fromMap(doc.data()))
-        .toList();
+    return query.docs.map((doc) => Video.fromMap(doc.data())).toList();
   }
 
   Future<Video> getVideo(String videoId) async {
@@ -141,14 +137,16 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/youtube'
         '?ids=$s');
-    List<Map<String, dynamic>> list =
-        json.decode(resp.body) as List<Map<String, dynamic>>;
+    List<Map<String, dynamic>> list = (json.decode(resp.body) as List)
+        .map((dynamic e) => Map<String, dynamic>.from(e as Map))
+        .toList();
     return list.map((j) => YoutubeChannel.fromMap(j)).toList();
   }
 
   Future<YoutubeChannel> getChannelHttp(String id) async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/youtube/$id');
-    return YoutubeChannel.fromMap(json.decode(resp.body)as Map<String, dynamic>);
+    return YoutubeChannel.fromMap(
+        json.decode(resp.body) as Map<String, dynamic>);
   }
 }
