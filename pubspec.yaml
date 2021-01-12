@@ -33,6 +33,11 @@ dev_dependencies:
     git:
       url: git://github.com/Johann13/ycapp_foundation.git
 
+  ycapp_analytics:
+    git:
+      url: git://github.com/Johann13/ycapp_analytics.git
+      ref: remove_platform_code
+
   sqflite: ^1.3.2+2
   flutter_local_notifications: ^3.0.3
   device_info: ^1.0.0

@@ -1,7 +1,10 @@
 # This is a generated file; do not edit or check into version control.
-ycapp_foundation=/Users/johannfeser/Projects/YcApp/ycapp_foundation/
+ycapp_analytics=/Users/johannfeser/flutter/.pub-cache/git/ycapp_analytics-1985e0f4602489436e7ebc474d6ffc9f4d2b0024/
+ycapp_foundation=/Users/johannfeser/flutter/.pub-cache/git/ycapp_foundation-048408e46a9941287b7702e9f62d1c0d9b019f43/
 cloud_firestore=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.15.0/
 cloud_firestore_web=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore_web-0.3.0/
+cloud_functions=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_functions-0.8.0/
+cloud_functions_web=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/cloud_functions_web-3.1.2/
 connectivity=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-2.0.2/
 connectivity_for_web=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_for_web-0.3.1+4/
 connectivity_macos=/Users/johannfeser/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_macos-0.1.0+7/
