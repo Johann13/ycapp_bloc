@@ -23,16 +23,15 @@ dev_dependencies:
   firebase_analytics: ^7.0.0
   cloud_firestore: ^0.15.0
   firebase_remote_config: ^0.5.0
-  #firestore_ui: ^1.11.0
 
-  #ycapp_messaging:
-  #  path: ../ycapp_messaging
-
-  ycapp_analytics:
-    path: ../ycapp_analytics
+  ycapp_messaging:
+    git:
+      url: git://github.com/Johann13/ycapp_messaging.git
+      ref: fcm-8dev
 
   ycapp_foundation:
-    path: ../ycapp_foundation
+    git:
+      url: git://github.com/Johann13/ycapp_foundation.git
 
   sqflite: ^1.3.2+2
   flutter_local_notifications: ^3.0.3
