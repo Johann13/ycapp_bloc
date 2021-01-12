@@ -38,9 +38,8 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         .orderBy('publishedAt', descending: true)
         .limit(last)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((changes) => TwitchVideo.fromMap(changes.document.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => TwitchVideo.fromMap(doc.data())).toList());
   }
 
   Stream<List<TwitchVideo>> getArchives(String twitchId) {
@@ -118,9 +117,8 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         .orderBy('publishedAt', descending: true)
         .limit(5)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((changes) => TwitchClip.fromMap(changes.document.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => TwitchClip.fromMap(doc.data())).toList());
   }
 
   Future<http.Response> getTwitchFollows(String name) async {

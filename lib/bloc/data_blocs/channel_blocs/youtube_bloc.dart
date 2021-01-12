@@ -25,9 +25,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .collection('YoutubeVideo')
         .where('youtubeId', isEqualTo: youtubeId)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => Video.fromMap(doc.data())).toList());
   }
 
   Stream<List<Video>> getLatestMainChannelVideo(String creatorId) {
@@ -37,9 +36,8 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .where('creator', arrayContains: creatorId)
         .orderBy('publisedAt', descending: true)
         .snapshots()
-        .map((query) => query.documentChanges
-            .map((doc) => Video.fromMap(doc.document.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => Video.fromMap(doc.data())).toList());
   }
 
   Stream<List<Video>> getAllVideos(List<String> youtubeIds) {
@@ -67,9 +65,7 @@ class YoutubeBloc extends ChannelBloc<YoutubeChannel> {
         .limit(limit)
         .orderBy('publishedAt', descending: true)
         .get();
-    return query.documentChanges
-        .map((doc) => Video.fromMap(doc.document.data()))
-        .toList();
+    return query.docs.map((doc) => Video.fromMap(doc.data())).toList();
   }
 
   Future<Video> getVideo(String videoId) async {
