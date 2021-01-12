@@ -9,8 +9,7 @@ class PollBloc {
         .collection('Poll')
         .orderBy('createdAt', descending: false)
         .snapshots()
-        .map((querySnapshot) => querySnapshot.docs
-            .map((change) => Poll.fromMap(change.data()))
-            .toList());
+        .map((querySnapshot) =>
+            querySnapshot.docs.map((doc) => Poll.fromMap(doc.data())).toList());
   }
 }

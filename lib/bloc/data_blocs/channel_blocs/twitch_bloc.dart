@@ -14,7 +14,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
       getSubList(creator).isNotEmpty;
 
   List<String> getSubList(Creator creator) {
-    List<String> l =
+    List l =
         creator.twitch.where((id) => subscriptionsList.contains(id)).toList();
     return l;
   }
@@ -38,9 +38,8 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         .orderBy('publishedAt', descending: true)
         .limit(last)
         .snapshots()
-        .map((query) => query.docs
-            .map((changes) => TwitchVideo.fromMap(changes.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => TwitchVideo.fromMap(doc.data())).toList());
   }
 
   Stream<List<TwitchVideo>> getArchives(String twitchId) {
@@ -118,9 +117,8 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
         .orderBy('publishedAt', descending: true)
         .limit(5)
         .snapshots()
-        .map((query) => query.docs
-            .map((changes) => TwitchClip.fromMap(changes.data()))
-            .toList());
+        .map((query) =>
+            query.docs.map((doc) => TwitchClip.fromMap(doc.data())).toList());
   }
 
   Future<http.Response> getTwitchFollows(String name) async {
@@ -142,7 +140,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
   String collectionPath() => 'TwitchChannel';
 
   @override
-  TwitchChannel fromMap(Map<String, dynamic> map) => TwitchChannel.fromMap(map);
+  TwitchChannel fromMap(Map map) => TwitchChannel.fromMap(map);
 
   @override
   List<TwitchChannel> sortByIds(List<TwitchChannel> list) {
@@ -153,8 +151,7 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
   Future<List<TwitchChannel>> getAllChannelHttp() async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/twitch');
-    List<Map<String, dynamic>> list =
-        json.decode(resp.body) as List<Map<String, dynamic>>;
+    List list = json.decode(resp.body);
     return list.map((j) => TwitchChannel.fromMap(j)).toList();
   }
 
@@ -167,15 +164,13 @@ class TwitchBloc extends ChannelBloc<TwitchChannel> {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/twitch'
         '?ids=$s');
-    List<Map<String, dynamic>> list =
-        json.decode(resp.body) as List<Map<String, dynamic>>;
+    List list = json.decode(resp.body);
     return list.map((j) => TwitchChannel.fromMap(j)).toList();
   }
 
   Future<TwitchChannel> getChannelHttp(String id) async {
     var resp = await http.get(
         'https://europe-west1-yogscastapp-7e6f0.cloudfunctions.net/userAccessData/data/twitch/$id');
-    return TwitchChannel.fromMap(
-        json.decode(resp.body) as Map<String, dynamic>);
+    return TwitchChannel.fromMap(json.decode(resp.body));
   }
 }

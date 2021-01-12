@@ -26,7 +26,7 @@ class ConfigBlocMobile extends ConfigBloc {
       return null;
     }
     final RemoteConfig remoteConfig = await RemoteConfig.instance;
-    remoteConfig.setConfigSettings(RemoteConfigSettings(debugMode: false));
+    remoteConfig.setConfigSettings(RemoteConfigSettings());
     remoteConfig.setDefaults(defaults);
     await remoteConfig.fetch(expiration: const Duration(hours: 12));
 
